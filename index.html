@@ -1,0 +1,110 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<title>HCIPlayer</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<script type="text/javascript" charset="utf-8" src="cordova-1.9.0.js"></script>
+		<script type="text/javascript" charset="utf-8" src="jquery.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="socket.io.js"></script>
+		<script type="text/javascript" charset="utf-8" src="jquery.mobile-1.2.0.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="javascript.js"></script>
+		<link rel="stylesheet" href="jquery.mobile-1.2.0.min.css" />
+		<link rel="stylesheet" href="style.css" />
+</head> 
+<body> 
+
+<div data-role="page" id="playlist">
+	<div data-id="header" data-role="header" data-position="fixed">
+		<h1>Now playing track</h1>
+
+    <div data-role="navbar">
+		  <ul>
+			  <li><a class="ui-btn-active ui-state-persist" href="#playlist">Playlist</a></li>
+			  <li><a href="#addTrack">Add track</a></li>
+			  <li><a href="#">Get suggestions</a></li>
+		  </ul>
+	  </div>
+  </div>
+
+  <div id="playlistItems" data-role="content">
+    <div data-role="collapsible" data-mini="true" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false" data-content-theme="b">
+
+      <h2>Track A</h2>
+      <ul>
+        <li>Info 1: <a href="index.html">Canary</a></li>
+		    <li>Info 2: <a href="index.html">Cat</a></li>
+		    <li>Info 3: <a href="index.html">Dog</a></li>
+			  <li>Info 4: <a href="index.html">Gerbil</a></li>
+		  </ul>
+
+	  </div>
+
+    <div data-role="collapsible" data-mini="true" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false" data-content-theme="b">
+
+      <h2>Track B</h2>
+      <ul>
+        <li>Info 1: <a href="index.html">Canary</a></li>
+		    <li>Info 2: <a href="index.html">Cat</a></li>
+		    <li>Info 3: <a href="index.html">Dog</a></li>
+			  <li>Info 4: <a href="index.html">Gerbil</a></li>
+		  </ul>
+
+    </div>
+
+	</div>
+
+</div>
+
+<div data-role="page" id="addTrack">
+
+	<div data-id="header" data-role="header" data-position="fixed">
+		<h1>Now playing track</h1>
+
+    <div data-role="navbar">
+		  <ul>
+			  <li><a href="#playlist">Playlist</a></li>
+			  <li><a class="ui-btn-active ui-state-persist" href="#addTrack">Add track</a></li>
+			  <li><a href="#">Get suggestions</a></li>
+		  </ul>
+	  </div>
+  </div>
+
+	<div data-role="content">	
+		<label for="search-basic">Search Input:</label>
+    <input type="search" name="search" id="search-basic" value="" />
+    <input id="searchSubmit" type="submit" name="search" value="Search" />
+
+    <br />
+
+    <div id="searchResults">
+
+      <div data-role="collapsible" data-mini="true" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false" data-content-theme="b">
+          <h2>Track A</h2>
+          <ul>
+            <li>Info 1: <a href="index.html">Canary</a></li>
+		        <li>Info 2: <a href="index.html">Cat</a></li>
+		        <li>Info 3: <a href="index.html">Dog</a></li>
+			      <li>Info 4: <a href="index.html">Gerbil</a></li>
+		      </ul>
+
+	      </div>
+
+      <div data-role="collapsible" data-mini="true" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false" data-content-theme="b">
+          <h2>Track A</h2>
+          <ul>
+            <li>Info 1: <a href="index.html">Canary</a></li>
+		        <li>Info 2: <a href="index.html">Cat</a></li>
+		        <li>Info 3: <a href="index.html">Dog</a></li>
+			      <li>Info 4: <a href="index.html">Gerbil</a></li>
+		      </ul>
+
+	      </div>
+
+    </div>
+
+	</div>
+
+</div>
+
+</body>
+</html>
