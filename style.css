@@ -1,3 +1,11 @@
 .ui-collapsible-heading {
 
 }
+
+.collapse-content {
+  display: none;
+}
+
+#playlistItems {
+  padding-left: 0;
+}
