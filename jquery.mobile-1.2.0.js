@@ -5169,7 +5169,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		contentTheme: null,
 		inset: true,
 		mini: false,
-		initSelector: ":jqmData(role='collapsible')"
+		initSelector: ":jqmData(role='collapsible')",
+    disabled: false
 	},
 	_create: function() {
 
@@ -5190,6 +5191,9 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 
 		// If we are in a collapsible set
 		if ( collapsibleSet.length ) {
+      // Inherit disabled Michiel edit
+      o.disabled = collapsibleSet.jqmData( "disabled" );
+
 			// Inherit the theme from collapsible-set
 			if ( !o.theme ) {
 				o.theme = collapsibleSet.jqmData( "theme" ) || $.mobile.getInheritedTheme( collapsibleSet, "c" );
@@ -5297,19 +5301,22 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			})
 			.trigger( o.collapsed ? "collapse" : "expand" );
 
-		collapsibleHeading
-			.bind( "tap", function( event ) {
-				collapsibleHeading.find( "a" ).first().addClass( $.mobile.activeBtnClass );
-			})
-			.bind( "click", function( event ) {
+    // Michiel edit
+    if( !o.disabled ) {
+		  collapsibleHeading
+			  .bind( "tap", function( event ) {
+				  collapsibleHeading.find( "a" ).first().addClass( $.mobile.activeBtnClass );
+			  })
+			  .bind( "click", function( event ) {
 
-				var type = collapsibleHeading.is( ".ui-collapsible-heading-collapsed" ) ? "expand" : "collapse";
+				  var type = collapsibleHeading.is( ".ui-collapsible-heading-collapsed" ) ? "expand" : "collapse";
 
-				collapsible.trigger( type );
+				  collapsible.trigger( type );
 
-				event.preventDefault();
-				event.stopPropagation();
-			});
+				  event.preventDefault();
+				  event.stopPropagation();
+			  });
+      }
 	}
 });
 
