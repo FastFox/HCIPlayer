@@ -8,6 +8,7 @@
 
 #playlistItems {
   padding-left: 0;
+  list-style: none;
 }
 
 .ui-icon-plus-green {
