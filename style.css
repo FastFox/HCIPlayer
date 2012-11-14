@@ -9,3 +9,13 @@
 #playlistItems {
   padding-left: 0;
 }
+
+.ui-icon-plus-green {
+  background-image: url(images/icon-plus-green.png);
+  background-position: 0;
+}
+
+.ui-icon-minus-red {
+  background-image: url(images/icon-minus-red.png);
+  background-position: 0;
+}
