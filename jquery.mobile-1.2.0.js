@@ -5156,7 +5156,6 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 })( jQuery );
 
-
 (function( $, undefined ) {
 
 $.widget( "mobile.collapsible", $.mobile.widget, {
@@ -5302,7 +5301,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			.trigger( o.collapsed ? "collapse" : "expand" );
 
     // Michiel edit
-    if( !o.disabled ) {
+    //if( !o.disabled ) {
 		  collapsibleHeading
 			  .bind( "tap", function( event ) {
 				  collapsibleHeading.find( "a" ).first().addClass( $.mobile.activeBtnClass );
@@ -5316,7 +5315,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				  event.preventDefault();
 				  event.stopPropagation();
 			  });
-      }
+     // }
 	}
 });
 
@@ -5326,6 +5325,86 @@ $( document ).bind( "pagecreate create", function( e ) {
 });
 
 })( jQuery );
+
+// Mlist
+
+(function( $, undefined ) {
+
+$.widget( "mobile.mlist", $.mobile.widget, {
+	options: {
+		theme: 'c',
+		contentTheme: null,
+		inset: true,
+		mini: true,
+		initSelector: ":jqmData(role='mlist')",
+    disabled: false
+	},
+	_create: function() {
+
+
+
+
+
+	}
+});
+
+//auto self-init widgets
+$( document ).bind( "pagecreate create", function( e ) {
+	$.mobile.mlist.prototype.enhanceWithin( e.target );
+});
+
+})( jQuery );
+
+// end Mlist
+
+// mlist set
+
+(function( $, undefined ) {
+
+$.widget( "mobile.mlistset", $.mobile.widget, {
+	options: {
+		initSelector: ":jqmData(role='mlist-set')",
+	},
+	_init: function() {
+
+		this.refresh();
+
+	},
+
+	refresh: function() {
+    /*
+    console.log( 'refresh' );
+		var $el = this.element,
+			o = this.options,
+			collapsiblesInSet = $el.children( "li" );
+
+
+			collapsiblesInSet.first()
+				.find( "h2" )
+					.first()
+					.addClass( "ui-corner-top" )
+					.find( ".ui-btn-inner" )
+						.addClass( "ui-corner-top" );
+	
+			collapsiblesInSet.last()
+				.find( "h2" )
+					.first()
+					.addClass( "ui-corner-bottom" )
+					.find( ".ui-btn-inner" )
+						.addClass( "ui-corner-bottom" );
+      */
+		
+	}
+});
+
+//auto self-init widgets
+$( document ).bind( "pagecreate create", function( e ) {
+	$.mobile.mlistset.prototype.enhanceWithin( e.target );
+});
+
+})( jQuery );
+
+// end mlist set
 
 (function( $, undefined ) {
 
