@@ -2,9 +2,9 @@ $('#searchSubmit').bind( 'click', function( e ) {
   alert( 'hoi' );
 } );
 
-$(document).ready(function() {
 
-  $('.feedback-good').bind( 'click', function(e) {
+function rebindFeedback( ) {
+  $('.feedback-good').unbind('click').bind( 'click', function(e) {
     console.log( 'Good' );
     if( !$(this).hasClass('ui-icon-plus-green') ) {
       $(this).removeClass('ui-icon-plus').addClass('ui-icon-plus-green');
@@ -18,7 +18,7 @@ $(document).ready(function() {
     return false;
   } );
 
-  $('.feedback-bad').bind( 'click', function(e) {
+  $('.feedback-bad').unbind('click').on( 'click', function(e) {
     console.log( 'Bad' );
     if( !$(this).hasClass('ui-icon-minus-red') ) {
       $(this).removeClass('ui-icon-minus').addClass('ui-icon-minus-red');
@@ -32,6 +32,11 @@ $(document).ready(function() {
 
     return false;
   } );
+}
+
+$(document).ready(function() {
+  rebindFeedback();
+
 
 $('#playlistItems').append( '<li data-role="collapsible" data-mini="true" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false" data-content-theme="b">\
         <h2>\
@@ -47,9 +52,7 @@ $('#playlistItems').append( '<li data-role="collapsible" data-mini="true" data-c
 			    <li>Feedback Score: + 2  - 1</a></li>\
 		    </ul>\
 	    </li>');
-    $('#playlistItems ul li:first').listview('refresh', true);
-  $('#playlistItems').bind('pageinit', function() {
-    $('#playlistItems').listview('refresh');
-  });
 
+    $( "#playlistItems" ).collapsibleset( "refresh" );
+    rebindFeedback();
 } );
