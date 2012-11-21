@@ -126,3 +126,10 @@ $( '#addTrack' ).live( 'pagebeforecreate',function(event){
   });
 
 });
+
+
+$( '#getSuggestions' ).live( 'pagebeforecreate',function(event){
+
+  
+
+});

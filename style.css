@@ -11,6 +11,10 @@
   list-style: none;
 }
 
+#suggestionsItems {
+  padding: 15px;
+}
+
 .ui-icon-plus-green {
   background-image: url(images/icon-plus-green.png);
   background-position: 0;

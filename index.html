@@ -23,7 +23,7 @@
 		  <ul>
 			  <li><a class="ui-btn-active ui-state-persist" href="#playlist">Playlist</a></li>
 			  <li><a href="#addTrack">Add track</a></li>
-			  <li><a href="#">Get suggestions</a></li>
+			  <li><a href="#getSuggestions">Get suggestions</a></li>
 		  </ul>
 	  </div>
   </div>
@@ -75,7 +75,7 @@
 		  <ul>
 			  <li><a href="#playlist">Playlist</a></li>
 			  <li><a class="ui-btn-active ui-state-persist" href="#addTrack">Add track</a></li>
-			  <li><a href="#">Get suggestions</a></li>
+			  <li><a href="#getSuggestions">Get suggestions</a></li>
 		  </ul>
 	  </div>
   </div>
@@ -113,6 +113,57 @@
 	    </li>
 
     </ul>
+    
+
+    </div>
+
+	</div>
+
+</div>
+
+
+<div data-role="page" id="getSuggestions">
+
+	<div data-id="header" data-role="header" data-position="fixed">
+		<h1>Artist - Track (Now playing track)</h1>
+
+    <div data-role="navbar">
+		  <ul>
+			  <li><a href="#playlist">Playlist</a></li>
+			  <li><a href="#addTrack">Add track</a></li>
+			  <li><a class="ui-btn-active ui-state-persist" href="#getSuggestions">Get suggestions</a></li>
+		  </ul>
+	  </div>
+  </div>
+
+	<div data-role="content">	
+
+    <div id="suggestions">
+
+      <ul id="suggestionsItems" class="ui-collapsible-set">
+        <li class="ui-collapsible">
+          <h2 class="ui-collapsible-heading ui-mini ui-btn ui-btn-up-c ui-corner-top">
+              <span class="ui-btn-inner">
+                Suggestie 1 Artiest - Track   Album Tags
+               </span>
+          </h2>
+	      </li>
+        <li class="ui-collapsible" >
+          <h2 class="ui-collapsible-heading ui-mini ui-btn ui-btn-up-c">
+              <span class="ui-btn-inner">
+                 Suggestie 2 Artiest - Track   Album Tags
+               </span>
+          </h2>
+	      </li>
+        <li class="ui-collapsible" >
+          <h2 class="ui-collapsible-heading ui-mini ui-btn ui-btn-up-c  ui-corner-bottom">
+              <span class="ui-btn-inner">
+                 Suggestie 3 Artiest - Track   Album Tags
+               </span>
+          </h2>
+	      </li>
+
+      </ul>
     
 
     </div>
