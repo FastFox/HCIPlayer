@@ -54,6 +54,7 @@ $(document).ready(function() {
     $( "#playlistItems" ).collapsibleset( "refresh" );
     rebindFeedback();
 
+    /*
     console.log( $( '#resultItems' ) );
     $( '#resultItems li:last h2' ).removeClass('ui-corner-bottom');
     $( '#resultItems' ).append('<li class="ui-collapsible" data-role="mlist">\
@@ -63,6 +64,7 @@ $(document).ready(function() {
              </span>\
         </h2>\
 	    </li>');
+    */
 
     //$('#resultItems').mlistset('refresh');
 
@@ -125,6 +127,11 @@ $( '#addTrack' ).live( 'pagebeforecreate',function(event){
     $('#resultItems li h2').unbind('click').bind('click', function(e) {
       addTrack( $(this).children('h2 span').text() );
     }); */
+
+    $('#resultItems').css('visibility', 'visible');
+    $('#resultItems li h2 .addTrack').unbind('click').bind('click', function(e) {
+      addTrack( $(this).parent().children().first().text() );
+    });
 
   });
 

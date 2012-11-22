@@ -28,3 +28,7 @@
 #resultItems li {
 
 }
+
+#searchResults {
+  visibility: hidden;
+}
