@@ -99,16 +99,22 @@ function addTrack( track ) {
 	    </li>');
     $( "#playlistItems" ).collapsibleset( "refresh" );
     rebindFeedback();
-    $('#playlistItems .active a').addClass('ui-btn-active').parent().removeClass('active');
+    //var newTrack = $('#playlistItems .active a').addClass('ui-btn-active').parent().removeClass('active');
+    var newTrack = $('#playlistItems .active a').addClass('ui-btn-active');
+    newTrack.parent().removeClass('active');
+
     setTimeout( function() { 
-         $('#playlistItems .ui-btn-active').removeClass('ui-btn-active')
-    }, 5000 );
-    window.location = '#playlist';
+         //$('#playlistItems .ui-btn-active').removeClass('ui-btn-active')
+         newTrack.removeClass('ui-btn-active');
+         console.log(newTrack);
+    }, 3000 );
+    //window.location = '#playlist';
 }
 
 $( '#addTrack' ).live( 'pagebeforecreate',function(event){
 
   $('#searchSubmit').bind('click', function(e) {
+    /*      
     $( '#resultItems li:last h2' ).removeClass('ui-corner-bottom');
     $( '#resultItems' ).append('<li class="ui-collapsible" data-role="mlist">\
         <h2 class="ui-collapsible-heading ui-mini ui-btn ui-btn-up-c ui-corner-bottom">\
@@ -118,12 +124,16 @@ $( '#addTrack' ).live( 'pagebeforecreate',function(event){
     $('#resultItems').css('visibility', 'visible');
     $('#resultItems li h2').unbind('click').bind('click', function(e) {
       addTrack( $(this).children('h2 span').text() );
-    });
+    }); */
+
   });
 
-  $('#resultItems li h2').bind('click', function(e) {
-    addTrack( $(this).children('h2 span').text() );
+
+  $('#resultItems li h2 .addTrack').bind('click', function(e) {
+    //console.log( 'hoi', $(this).parent().children().first() );
+    addTrack( $(this).parent().children().first().text() );
   });
+
 
 });
 
