@@ -1,4 +1,10 @@
+var data = new function() {
+  this.playlist = new Array();
+  this.searchlist = new Array();
+  
+}
 
+console.log( data );
 
 
 function rebindFeedback( ) {
