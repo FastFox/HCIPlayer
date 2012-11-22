@@ -57,7 +57,6 @@ var data = new function( ) {
 
     if( isNewTrack ) {
       var newTrack = $('#playlistItems li:last-child a').addClass('ui-btn-active');
-
       setTimeout( function() { 
         newTrack.removeClass('ui-btn-active');
       }, 3000 );
@@ -66,7 +65,6 @@ var data = new function( ) {
 
   this.pushSearchlist = function( track ) {
     this.searchlist.push( track );
-    //console.log( track );
     $('#resultItems').append( '<li data-role="collapsible" data-mini="true" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false" data-content-theme="b">\
           <h2 class="active">\
             <span style="float: left;">' + track.artist +' &ndash; ' + track.title + '</span>\
@@ -141,6 +139,7 @@ $(document).ready(function() {
 
 } );
 
+/* 
 function addTrack( track ) {
   $('#playlistItems').append( '<li data-role="collapsible" data-mini="true" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false" data-content-theme="b">\
         <h2 class="active">\
@@ -166,7 +165,7 @@ function addTrack( track ) {
          newTrack.removeClass('ui-btn-active');
     }, 3000 );
     //window.location = '#playlist';
-}
+} */
 
 $( '#playlist' ).live( 'pageinit', function( event ) {
   //console.log( '#playlist' );

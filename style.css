@@ -39,5 +39,12 @@
 
 .ui-icon-none {
   background-image: none;
+}
+
+/*
+#playlist ul li:first-child {
+  color: red !important;
+} */
+
 
 
