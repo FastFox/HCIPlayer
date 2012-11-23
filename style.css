@@ -1,75 +1,60 @@
-.ui-collapsible-heading {
-
+#suggestionItems {
+  padding: 0;
 }
-
-.collapse-content {
-  display: none;
+#suggestionItems li {
+  list-style-type: none;
 }
-
-#playlistItems, #resultItems, #suggestionItems {
-  padding-left: 0;
-  list-style: none;
+#suggestionItems li h2 {
+  margin: 0;
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #222222;
+  text-shadow: 0 1px 0 #FFFFFF;
+  border: 1px solid #CCCCCC;
+  border-top: 0;
+  background: linear-gradient(#ffffff, #f1f1f1) repeat scroll 0 0 #eeeeee;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
-
-#suggestionItems,  {
-  padding: 15px;
+#suggestionItems li h2 .collapser {
+  float: left;
+  margin: 6px;
+  width: 18px;
+  height: 18px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  background-color: #666;
+  background-image: url(images/icons-18-white.png);
+  background-repeat: no-repeat;
+  -moz-border-radius: 9px;
+  -webkit-border-radius: 9px;
+  border-radius: 9px;
 }
-
-.ui-icon-plus-green {
-  background-image: url(images/icon-plus-green.png);
-  background-position: 0;
+#suggestionItems li h2 .closed {
+  background-position: -108px 50%;
 }
-
-.ui-icon-minus-red {
-  background-image: url(images/icon-minus-red.png);
-  background-position: 0;
+#suggestionItems li h2 .open {
+  background-position: -216px 50%;
 }
-
-#resultItems li {
-
+#suggestionItems li h2 .track {
+  padding: 0 14px 0 12px;
 }
-
-#searchResults {
-  visibility: hidden;
+#suggestionItems li:first-child h2 {
+  border-top: 1px solid #CCCCCC;
+  -moz-border-radius-topright: .6em;
+  -webkit-border-top-right-radius: .6em;
+  border-top-right-radius: .6em;
+  -moz-border-radius-topleft: .6em;
+  -webkit-border-top-left-radius: .6em;
+  border-top-left-radius: .6em;
 }
-
-.ui-title {
-	margin: 0.5em 0 0.8em !important;
+#suggestionItems li:last-child h2 {
+  -moz-border-radius-bottomright: .6em;
+  -webkit-border-bottom-right-radius: .6em;
+  border-bottom-right-radius: .6em;
+  -moz-border-radius-bottomleft: .6em;
+  -webkit-border-bottom-left-radius: .6em;
+  border-bottom-left-radius: .6em;
 }
-
-.ui-icon-none {
-  background-image: none;
-}
-
-#playlist li:first-child h2 a span {
-  /* color: red !important; */
-}
-
-.feedback-bad {
-  margin-left: 6px;
-}
-
-.ui-icon {
-  height: 20px;
-  width: 20px;
-	-moz-border-radius: 				12px;
-	-webkit-border-radius: 				12px;
-	border-radius: 						12px;
-  /* margin-top: -11px !important;  */
-}
-
-#playlist li:first-child h2 a  {
-	border: 1px solid 		#f4c63f /*{e-bup-border}*/;
-	background: 			#fadb4e /*{e-bup-background-color}*/;
-	font-weight: bold;
-	color: 					#222 /*{e-bup-color}*/;
-	text-shadow: 0 /*{e-bup-shadow-x}*/ 1px /*{e-bup-shadow-y}*/ 0 /*{e-bup-shadow-radius}*/ 	#fff /*{e-bup-shadow-color}*/;
-	background-image: -webkit-gradient(linear, left top, left bottom, from( #ffefaa /*{e-bup-background-start}*/), to( #ffe155 /*{e-bup-background-end}*/)); /* Saf4+, Chrome */
-	background-image: -webkit-linear-gradient( #ffefaa /*{e-bup-background-start}*/, #ffe155 /*{e-bup-background-end}*/); /* Chrome 10+, Saf5.1+ */
-	background-image:    -moz-linear-gradient( #ffefaa /*{e-bup-background-start}*/, #ffe155 /*{e-bup-background-end}*/); /* FF3.6 */
-	background-image:     -ms-linear-gradient( #ffefaa /*{e-bup-background-start}*/, #ffe155 /*{e-bup-background-end}*/); /* IE10 */
-	background-image:      -o-linear-gradient( #ffefaa /*{e-bup-background-start}*/, #ffe155 /*{e-bup-background-end}*/); /* Opera 11.10+ */
-	background-image:         linear-gradient( #ffefaa /*{e-bup-background-start}*/, #ffe155 /*{e-bup-background-end}*/);
-
-
-

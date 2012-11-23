@@ -88,7 +88,7 @@ var data = new function( ) {
   this.pushSuggestionlist = function( track, refresh ) {
     refresh = typeof refresh !== 'undefined' ? refresh : true;
     this.searchlist.push( track );
-    $('#suggestionItems').append( '<li data-role="collapsible" data-mini="true" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false" data-content-theme="b">\
+    /* $('#suggestionItems').append( '<li data-role="collapsible" data-mini="true" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false" data-content-theme="b">\
           <h2 class="active">\
             <span style="float: left;">' + track.artist +' &ndash; ' + track.title + '</span>\
             <span class="addTrack ui-icon ui-icon-plus" style="float: right">&nbsp;</span>\
@@ -99,7 +99,7 @@ var data = new function( ) {
 		        <li>Tags: <a href="index.html">A</a> <a href="index.html">B</a></li>\
 			      <li>Feedback Score: + 2  - 1</a></li>\
 		      </ul>\
-	      </li>');
+	      </li>'); */
     if( refresh ) {
       $( "#suggestionItems" ).collapsibleset( "refresh" );
     }
