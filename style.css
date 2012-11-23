@@ -6,12 +6,12 @@
   display: none;
 }
 
-#playlistItems, #resultItems {
+#playlistItems, #resultItems, #suggestionItems {
   padding-left: 0;
   list-style: none;
 }
 
-#suggestionsItems {
+#suggestionItems,  {
   padding: 15px;
 }
 
@@ -41,10 +41,35 @@
   background-image: none;
 }
 
-/*
-#playlist ul li:first-child {
-  color: red !important;
-} */
+#playlist li:first-child h2 a span {
+  /* color: red !important; */
+}
+
+.feedback-bad {
+  margin-left: 6px;
+}
+
+.ui-icon {
+  height: 20px;
+  width: 20px;
+	-moz-border-radius: 				12px;
+	-webkit-border-radius: 				12px;
+	border-radius: 						12px;
+  /* margin-top: -11px !important;  */
+}
+
+#playlist li:first-child h2 a  {
+	border: 1px solid 		#f4c63f /*{e-bup-border}*/;
+	background: 			#fadb4e /*{e-bup-background-color}*/;
+	font-weight: bold;
+	color: 					#222 /*{e-bup-color}*/;
+	text-shadow: 0 /*{e-bup-shadow-x}*/ 1px /*{e-bup-shadow-y}*/ 0 /*{e-bup-shadow-radius}*/ 	#fff /*{e-bup-shadow-color}*/;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #ffefaa /*{e-bup-background-start}*/), to( #ffe155 /*{e-bup-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #ffefaa /*{e-bup-background-start}*/, #ffe155 /*{e-bup-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #ffefaa /*{e-bup-background-start}*/, #ffe155 /*{e-bup-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #ffefaa /*{e-bup-background-start}*/, #ffe155 /*{e-bup-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #ffefaa /*{e-bup-background-start}*/, #ffe155 /*{e-bup-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( #ffefaa /*{e-bup-background-start}*/, #ffe155 /*{e-bup-background-end}*/);
 
 
 

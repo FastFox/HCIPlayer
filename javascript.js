@@ -32,6 +32,7 @@ function rebindFeedback( ) {
 var data = new function( ) {
   this.playlist = new Array();
   this.searchlist = new Array();
+  this.suggestionlist = new Array();
   
   this.pushPlaylist = function( track, isNewTrack ) {
     isNewTrack = typeof isNewTrack !== 'undefined' ? isNewTrack : true;
@@ -56,14 +57,16 @@ var data = new function( ) {
     rebindFeedback();
 
     if( isNewTrack ) {
-      var newTrack = $('#playlistItems li:last-child a').addClass('ui-btn-active');
+      var newTrack = $('#playlistItems li:last-child a:first').addClass('ui-btn-active');
+      //var newTrack = $('#playlistItems li:last-child a').addClass('ui-btn-up-e');
       setTimeout( function() { 
         newTrack.removeClass('ui-btn-active');
       }, 3000 );
     }
   }
 
-  this.pushSearchlist = function( track ) {
+  this.pushSearchlist = function( track, refresh ) {
+    refresh = typeof refresh !== 'undefined' ? refresh : true;
     this.searchlist.push( track );
     $('#resultItems').append( '<li data-role="collapsible" data-mini="true" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false" data-content-theme="b">\
           <h2 class="active">\
@@ -77,7 +80,29 @@ var data = new function( ) {
 			      <li>Feedback Score: + 2  - 1</a></li>\
 		      </ul>\
 	      </li>');
-      //$( "#resultItems" ).collapsibleset( "refresh" );
+    if( refresh ) {
+      $( "#resultItems" ).collapsibleset( "refresh" );
+    }
+  }
+
+  this.pushSuggestionlist = function( track, refresh ) {
+    refresh = typeof refresh !== 'undefined' ? refresh : true;
+    this.searchlist.push( track );
+    $('#suggestionItems').append( '<li data-role="collapsible" data-mini="true" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false" data-content-theme="b">\
+          <h2 class="active">\
+            <span style="float: left;">' + track.artist +' &ndash; ' + track.title + '</span>\
+            <span class="addTrack ui-icon ui-icon-plus" style="float: right">&nbsp;</span>\
+          </h2>\
+          <ul>\
+            <li>Album: <a href="index.html">Hoi</a></li>\
+		        <li>Cover: <img src="" alt="cover" /></li>\
+		        <li>Tags: <a href="index.html">A</a> <a href="index.html">B</a></li>\
+			      <li>Feedback Score: + 2  - 1</a></li>\
+		      </ul>\
+	      </li>');
+    if( refresh ) {
+      $( "#suggestionItems" ).collapsibleset( "refresh" );
+    }
   }
 }
 
@@ -168,7 +193,7 @@ function addTrack( track ) {
 } */
 
 $( '#playlist' ).live( 'pageinit', function( event ) {
-  //console.log( '#playlist' );
+
   data.pushPlaylist( { 
     spotify: "123",
     artist: "Nitrous Oxide",
@@ -199,6 +224,7 @@ $( '#playlist' ).live( 'pageinit', function( event ) {
     title: "Muriwai"
   }, false );
 
+  /* 
   data.pushSearchlist( {
     spotify: "123",
     artist: "Nitrous Oxide",
@@ -209,26 +235,21 @@ $( '#playlist' ).live( 'pageinit', function( event ) {
     spotify: "123",
     artist: "Nitrous Oxide",
     title: "Downforce"
-  } );
+  } ); */
 
 } );
 
 $( '#addTrack' ).live( 'pagebeforecreate',function(event){
 
   $('#searchSubmit').bind('click', function(e) {
-    /*      
-    $( '#resultItems li:last h2' ).removeClass('ui-corner-bottom');
-    $( '#resultItems' ).append('<li class="ui-collapsible" data-role="mlist">\
-        <h2 class="ui-collapsible-heading ui-mini ui-btn ui-btn-up-c ui-corner-bottom">\
-            <span class="ui-btn-inner">' + $('#search-basic').val() +'</span>\
-        </h2>\
-	    </li>');
-    $('#resultItems').css('visibility', 'visible');
-    $('#resultItems li h2').unbind('click').bind('click', function(e) {
-      addTrack( $(this).children('h2 span').text() );
-    }); */
+    data.pushSearchlist( {
+      spotify: "123",
+      artist: "Tritonal",
+      title: "Ziziki (Estiva Remix)"
+    } );
+  
+    $('#resultItems').css('visibility', 'visible');  
 
-    $('#resultItems').css('visibility', 'visible');
     $('#resultItems li h2 .addTrack').unbind('click').bind('click', function(e) {
       //addTrack( $(this).parent().children().first().text() );
       //console.log( data.playlist );
@@ -241,7 +262,6 @@ $( '#addTrack' ).live( 'pagebeforecreate',function(event){
 
   });
 
-
   $('#resultItems li h2 .addTrack').bind('click', function(e) {
     console.log( 'hoi', $(this).parent().children().first() );
     //addTrack( $(this).parent().children().first().text() );
@@ -250,12 +270,21 @@ $( '#addTrack' ).live( 'pagebeforecreate',function(event){
     return false;
   });
 
-
 });
 
 
 $( '#getSuggestions' ).live( 'pagebeforecreate',function(event){
 
-  
+  data.pushSuggestionlist( {
+    spotify: "123",
+    artist: "Nitrous Oxide",
+    title: "Blurry Motion"
+  }, false );
+
+  data.pushSuggestionlist( {
+    spotify: "123",
+    artist: "Nitrous Oxide",
+    title: "Downforce"
+  }, false );
 
 });
