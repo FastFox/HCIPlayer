@@ -1,3 +1,15 @@
+#test .a {
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-right: 30px;
+}
+#test .b {
+  position: absolute;
+  right: 10px;
+  margin-top: -22px;
+}
 #suggestionItems {
   padding: 0;
 }
@@ -16,11 +28,9 @@
   border-top: 0;
   background: linear-gradient(#ffffff, #f1f1f1) repeat scroll 0 0 #eeeeee;
   white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
 }
 #suggestionItems li h2 .collapser {
-  float: left;
+  position: absolute;
   margin: 6px;
   width: 18px;
   height: 18px;
@@ -32,14 +42,61 @@
   -webkit-border-radius: 9px;
   border-radius: 9px;
 }
-#suggestionItems li h2 .closed {
+#suggestionItems li h2 .collapser.closed {
   background-position: -108px 50%;
 }
-#suggestionItems li h2 .open {
+#suggestionItems li h2 .collapser.open {
   background-position: -216px 50%;
 }
 #suggestionItems li h2 .track {
-  padding: 0 14px 0 12px;
+  display: block;
+  padding: 0 56px 0 32px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#suggestionItems li h2 .thumbup {
+  position: absolute;
+  margin: 6px;
+  width: 18px;
+  height: 18px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  background-color: #666;
+  background-image: url(images/icons-18-white.png);
+  background-repeat: no-repeat;
+  -moz-border-radius: 9px;
+  -webkit-border-radius: 9px;
+  border-radius: 9px;
+  margin-top: -24px;
+  right: 48px;
+  background-position: 0px 50%;
+}
+#suggestionItems li h2 .thumbdown {
+  position: absolute;
+  margin: 6px;
+  width: 18px;
+  height: 18px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  background-color: #666;
+  background-image: url(images/icons-18-white.png);
+  background-repeat: no-repeat;
+  -moz-border-radius: 9px;
+  -webkit-border-radius: 9px;
+  border-radius: 9px;
+  margin-top: -24px;
+  right: 16px;
+  background-position: -36px 50%;
+}
+#suggestionItems li .info {
+  border: 1px solid #999999;
+  border-top: 0;
+  border-bottom-color: #CCCCCC;
+}
+#suggestionItems li .info.open {
+  display: block;
+}
+#suggestionItems li .info.closed {
+  display: none;
 }
 #suggestionItems li:first-child h2 {
   border-top: 1px solid #CCCCCC;
