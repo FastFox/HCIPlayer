@@ -1,0 +1,207 @@
+#test {
+	.a {
+		display: block;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		margin-right: 30px;
+	}
+	.b {
+		position: absolute;
+		right: 10px;
+		margin-top: -22px;
+	}
+}
+
+.cornersTop(@radius: 9px) {
+  -webkit-border-top-right-radius: @radius;
+  -moz-border-radius-topright: @radius;
+  border-top-right-radius: @radius;	
+  -webkit-border-top-left-radius: @radius;
+  -moz-border-radius-topleft: @radius;
+  border-top-left-radius: @radius;	
+}
+
+.cornersBottom(@radius: 9px) {
+  -webkit-border-bottom-right-radius: @radius;
+  -moz-border-radius-bottomright: @radius;
+  border-bottom-right-radius: @radius;	
+  -webkit-border-bottom-left-radius: @radius;
+  -moz-border-radius-bottomleft: @radius;
+  border-bottom-left-radius: @radius;	
+}
+
+.corners(@radius: 9px) {
+	.cornersTop(@radius);
+	.cornersBottom(@radius);
+}
+
+.shadow(@color: #387bbe) {
+	-moz-box-shadow: inset 0px 0px 3px @color, 0px 0px 9px @color;
+	-webkit-box-shadow: inset 0px 0px 3px @color, 0px 0px 9px @color;
+	box-shadow: inset 0px 0px 3px @color, 0px 0px 9px @color;
+}
+
+
+.list {
+	padding: 0;
+	li {
+		list-style-type: none;	
+		h2 {
+			margin: 0;
+			height: 30px;
+			line-height: 30px;
+			font-size: 16px;
+			font-weight: bold;
+			color: #222222;
+			text-shadow: 0 1px 0 #FFFFFF;
+			border: 1px solid #CCCCCC;
+			border-top: 0;
+			background: linear-gradient(#FFFFFF, #F1F1F1) repeat scroll 0 0 #EEEEEE;
+			white-space: nowrap;
+			.icon() {
+				position: absolute;
+				margin: 6px;
+				width: 18px;
+				height: 18px;
+				box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+				background-color: #666;
+				background-image: url(images/icons-18-white.png);
+				background-repeat: no-repeat;
+			  /*
+				-moz-border-radius: 9px;
+				-webkit-border-radius: 9px;
+				border-radius: 9px;
+				*/
+				.corners(9px);
+			}
+
+			.collapser {
+				.icon;
+			}
+
+			.track {
+				display: block;
+				padding: 0 56px 0 32px;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			.thumb() {
+				position: absolute;
+				.icon;
+				margin-top: -24px;
+			}
+			.thumbup {
+				.thumb;
+				right: 48px;
+				background-position: 0px 50%;
+			}
+			.thumbup.liked {
+
+			}
+			.thumbup.disliked {
+
+			}
+			.thumbdown {
+				.thumb;
+				right: 16px;
+				background-position: -36px 50%;
+			}
+			.thumbdown.liked {
+
+			}
+			.thumbdown.disliked {
+
+			}
+			.addTrack {
+				position: absolute;
+				.icon;
+				background-position: 0 50%;
+				margin-top: -24px;
+				right: 16px;
+			}
+			.trackAdded {
+				position: absolute;
+				.icon;
+				background-position: -252px 50%;
+				margin-top: -24px;
+				right: 16px;
+				.shadow(#387bbe);
+			}
+		}
+		&.open {
+			h2 .collapser {
+				background-position: -216px 50%;
+			}
+			.info {
+				display: block;
+			}
+		}
+		&.closed {
+			h2 .collapser {
+				background-position: -108px 50%;
+			}
+			.info {
+				display: none;
+			}
+		}
+
+		.info {
+			border: 1px solid #999999;
+			border-top: 0;
+			border-bottom-color: #CCCCCC;
+		}
+		&.new h2 {
+			.shadow(#387bbe);
+			/*
+			-moz-box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
+			-webkit-box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
+			box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
+			*/
+		}
+	}
+
+	li:first-child h2 {
+		border-top: 1px solid #CCCCCC;
+		/*
+		-moz-border-radius-topright: .6em; 
+		-webkit-border-top-right-radius: .6em;
+		border-top-right-radius: .6em;
+		-moz-border-radius-topleft: .6em; 
+		-webkit-border-top-left-radius: .6em;
+		border-top-left-radius: .6em;
+		*/
+		.cornersTop(9px);
+	}
+	li:last-child.closed h2 {
+		/* 
+		-moz-border-radius-bottomright: .6em; 
+		-webkit-border-bottom-right-radius: .6em;
+		border-bottom-right-radius: .6em;
+		-moz-border-radius-bottomleft: .6em; 
+		-webkit-border-bottom-left-radius: .6em;
+		border-bottom-left-radius: .6em;
+		*/
+		.cornersBottom(9px);
+	}
+	li:last-child .info {
+		/*
+		-moz-border-radius-bottomright: .6em; 
+		-webkit-border-bottom-right-radius: .6em;
+		border-bottom-right-radius: .6em;
+		-moz-border-radius-bottomleft: .6em; 
+		-webkit-border-bottom-left-radius: .6em;
+		border-bottom-left-radius: .6em;
+		*/
+		.cornersBottom(9px);
+	}
+}
+
+ul#playlistItems li:first-child h2 {
+	.shadow(#f4c63f);
+}
+
+#searchResults {
+	//display: none;
+}
