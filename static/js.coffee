@@ -4,11 +4,11 @@ suggestionData = []
 
 searchData = []
 
+socket = io.connect 'http://localhost'
+
 $(document).ready () ->
 	$('ul.list li').live 'click', (e) ->
 		$(this).toggleClass('open closed').parent().children('.open').not(this).toggleClass 'open closed'
-	
-	socket = io.connect 'http://localhost'
 	
 
 $('#playlist').live 'pagebeforecreate', () ->	
@@ -31,18 +31,20 @@ $('#playlist').live 'pagebeforecreate', () ->
 
 addTrackToPlaylist = (e) ->
 		$(e).toggleClass 'addTrack trackAdded'
-		$.observable(playlistData).insert playlistData.length, $.view($(e).parent().parent()).data
+		data = $.view($(e).parent().parent()).data
+		$.observable(playlistData).insert playlistData.length, data
 		newTrack = $('#playlistItems li:last').addClass 'new'
 		setTimeout ( ->
 			newTrack.removeClass 'new'
 		), 3000
+	
+		console.log 'hoi'
+		socket.emit 'addTrack', data	
 
-		if
 
 $('#addTrack').live 'pagebeforecreate', () ->	
 	$('#searchSubmit').bind 'click', (e) ->
 		$('#searchResults').css 'display', 'block'
-	
 		
 		$.ajax {
 			type: 'POST',
@@ -50,8 +52,8 @@ $('#addTrack').live 'pagebeforecreate', () ->
 			data: { type: 'artist', query: $('#search-basic').val() }
 			dataType: 'json', 
 			success: (data) ->
-				console.log 'hoi'
-				console.log data
+				#console.log 'hoi'
+				#console.log data
 				#$.observable(searchData).data = data
 				$.observable(searchData).refresh data
 				#console.log $.observable(searchData)

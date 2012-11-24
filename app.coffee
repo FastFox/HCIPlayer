@@ -3,10 +3,8 @@ spotify = require 'spotify'
 echonest = require 'echonest'
 http = require 'http'
 app = express()
-io = require 'socket.io'
-server = http.createServer app
-io = io.listen(server)
-app.listen 3000
+server = app.listen 3000
+io = require('socket.io').listen server
 
 app.use express.static(__dirname+'/static')
 app.use express.bodyParser()
@@ -14,8 +12,10 @@ app.use express.bodyParser()
 nest = new echonest.Echonest { api_key: 'PCG7Z9OEOD91S20SU' }
 
 
-io.sockets.on 'connection', (socket) ->
-	console.log socket
+io.on 'connection', (socket) ->
+	#console.log socket
+	socket.on 'addTrack', (data) ->
+		console.log data
 
 ###
 spotify.get  '/lookup/1/.json?uri=spotify:artist:4YrKBkKSVeqDamzBPWVnSJ', (err, res) ->
@@ -62,3 +62,4 @@ app.post '/search', (req, res) ->
 	#res.json hoi
 ###
 #
+#app.listen 3000
