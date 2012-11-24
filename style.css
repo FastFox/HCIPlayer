@@ -42,12 +42,6 @@
   -webkit-border-radius: 9px;
   border-radius: 9px;
 }
-#suggestionItems li h2 .collapser.closed {
-  background-position: -108px 50%;
-}
-#suggestionItems li h2 .collapser.open {
-  background-position: -216px 50%;
-}
 #suggestionItems li h2 .track {
   display: block;
   padding: 0 56px 0 32px;
@@ -87,16 +81,22 @@
   right: 16px;
   background-position: -36px 50%;
 }
+#suggestionItems li.open h2 .collapser {
+  background-position: -216px 50%;
+}
+#suggestionItems li.open .info {
+  display: block;
+}
+#suggestionItems li.closed h2 .collapser {
+  background-position: -108px 50%;
+}
+#suggestionItems li.closed .info {
+  display: none;
+}
 #suggestionItems li .info {
   border: 1px solid #999999;
   border-top: 0;
   border-bottom-color: #CCCCCC;
-}
-#suggestionItems li .info.open {
-  display: block;
-}
-#suggestionItems li .info.closed {
-  display: none;
 }
 #suggestionItems li .new {
   -moz-box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
@@ -112,7 +112,15 @@
   -webkit-border-top-left-radius: .6em;
   border-top-left-radius: .6em;
 }
-#suggestionItems li:last-child h2 {
+#suggestionItems li:last-child.closed h2 {
+  -moz-border-radius-bottomright: .6em;
+  -webkit-border-bottom-right-radius: .6em;
+  border-bottom-right-radius: .6em;
+  -moz-border-radius-bottomleft: .6em;
+  -webkit-border-bottom-left-radius: .6em;
+  border-bottom-left-radius: .6em;
+}
+#suggestionItems li:last-child .info {
   -moz-border-radius-bottomright: .6em;
   -webkit-border-bottom-right-radius: .6em;
   border-bottom-right-radius: .6em;

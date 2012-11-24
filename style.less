@@ -46,12 +46,7 @@
 			.collapser {
 				.icon;
 			}
-			.collapser.closed {
-				background-position: -108px 50%;
-			}
-			.collapser.open {
-				background-position: -216px 50%;
-			}
+
 			.track {
 				display: block;
 				padding: 0 56px 0 32px;
@@ -88,17 +83,27 @@
 
 			}
 		}
+		&.open {
+			h2 .collapser {
+				background-position: -216px 50%;
+			}
+			.info {
+				display: block;
+			}
+		}
+		&.closed {
+			h2 .collapser {
+				background-position: -108px 50%;
+			}
+			.info {
+				display: none;
+			}
+		}
+
 		.info {
 			border: 1px solid #999999;
 			border-top: 0;
 			border-bottom-color: #CCCCCC;
-		}
-		.info.open {
-			display: block;
-
-		}
-		.info.closed {
-			display: none;
 		}
 		.new {
 			-moz-box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
@@ -106,6 +111,7 @@
 			box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
 		}
 	}
+
 	li:first-child h2 {
 		border-top: 1px solid #CCCCCC;
 		-moz-border-radius-topright: .6em; 
@@ -115,7 +121,15 @@
 		-webkit-border-top-left-radius: .6em;
 		border-top-left-radius: .6em;
 	}
-	li:last-child h2 {
+	li:last-child.closed h2 {
+		-moz-border-radius-bottomright: .6em; 
+		-webkit-border-bottom-right-radius: .6em;
+		border-bottom-right-radius: .6em;
+		-moz-border-radius-bottomleft: .6em; 
+		-webkit-border-bottom-left-radius: .6em;
+		border-bottom-left-radius: .6em;
+	}
+	li:last-child .info {
 		-moz-border-radius-bottomright: .6em; 
 		-webkit-border-bottom-right-radius: .6em;
 		border-bottom-right-radius: .6em;
