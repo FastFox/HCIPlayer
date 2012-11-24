@@ -48,6 +48,21 @@ addTrackToPlaylist = (e) ->
 $('#addTrack').live 'pagebeforecreate', () ->	
 	$('#searchSubmit').bind 'click', (e) ->
 		$('#searchResults').css 'display', 'block'
+	
+		doei = { lol: 'bla' }
+
+		$.ajax {
+			type: 'POST',
+			url: 'http://localhost:3000/search',
+			data: doei,
+			dataType: 'json', 
+			success: (data) ->
+				console.log 'hoi'
+				console.log data
+		}	
+
+
+
 
 	$('#searchItems .addTrack').live 'click', (e) ->
 		addTrackToPlaylist(this)

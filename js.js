@@ -78,7 +78,21 @@ addTrackToPlaylist = function(e) {
 
 $('#addTrack').live('pagebeforecreate', function() {
   $('#searchSubmit').bind('click', function(e) {
-    return $('#searchResults').css('display', 'block');
+    var doei;
+    $('#searchResults').css('display', 'block');
+    doei = {
+      lol: 'bla'
+    };
+    return $.ajax({
+      type: 'POST',
+      url: 'http://localhost:3000/search',
+      data: doei,
+      dataType: 'json',
+      success: function(data) {
+        console.log('hoi');
+        return console.log(data);
+      }
+    });
   });
   $('#searchItems .addTrack').live('click', function(e) {
     addTrackToPlaylist(this);
