@@ -98,6 +98,11 @@
 #suggestionItems li .info.closed {
   display: none;
 }
+#suggestionItems li .new {
+  -moz-box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
+  -webkit-box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
+  box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
+}
 #suggestionItems li:first-child h2 {
   border-top: 1px solid #CCCCCC;
   -moz-border-radius-topright: .6em;
