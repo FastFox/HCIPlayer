@@ -8,6 +8,13 @@ suggestionData =[
 	{ artist: 'Nitrous Oxide', title: 'Alderaan 2' }
 ]
 
+
+searchData =[
+	{ artist: 'Nitrous Oxide', title: 'Alderaan' },
+	{ artist: 'Nitrous Oxide', title: 'Alderaan 2' }
+]
+
+
 $(document).ready () ->
 	$('ul.list li').live 'click', (e) ->
 		#console.log 'toggle'
@@ -31,6 +38,18 @@ $('#playlist').live 'pagebeforecreate', () ->
 	$.templates { playlistItem: '#playlistItem' }
 	$.link.playlistItem '#playlistItems', playlistData
 	#$.observable(playlistData).insert playlistData.length, { artist: 'Michiel', title: 'Track 3' }
+
+$('#addTrack').live 'pagebeforecreate', () ->	
+	$('#searchSubmit').bind 'click', (e) ->
+		$('#searchResults').css 'display', 'block'
+
+	$('#searchItems .addTrack').live 'click', (e) ->
+		$(this).toggleClass 'addTrack trackAdded'
+		false
+
+	$.templates { searchItem: '#searchItem' }
+	$.link.searchItem '#searchItems', searchData
+	
 
 $('#getSuggestions').live 'pagebeforecreate', () ->	
 	$('#suggestionItems .addTrack').live 'click', (e) ->

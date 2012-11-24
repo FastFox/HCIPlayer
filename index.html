@@ -72,6 +72,21 @@
 	  </div>
   </div>
 
+	<script id="searchItem" type="text/x-jsrender">
+        <li class="closed">
+					<h2>
+							<span class="collapser"> </span>
+							<span class="track">{{>artist}} – {{>title}}</span>
+							<span class="addTrack"> </span>
+					</h2>
+					<div class="info">
+						Album: Dreamcatcher <br />
+						Tags: Trance, Progressive <br />
+						Score: + 2 - 1
+					</div>
+				</li>
+	</script>
+
 	<div data-role="content">	
 		<label for="search-basic">Search Input:</label>
     <input type="search" name="search" id="search-basic" value="" />
@@ -81,9 +96,9 @@
 
     <div id="searchResults">
 
-      <ul id="resultItems" data-role="collapsible-set">
+      <ul id="searchItems" class="list">
 
-      </ul>   
+      </ul>
 
     </div>
 
