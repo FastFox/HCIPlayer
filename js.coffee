@@ -4,14 +4,14 @@ playlistData = [
 ]
 
 suggestionData =[
-	{ artist: 'Nitrous Oxide', title: 'Alderaan' },
-	{ artist: 'Nitrous Oxide', title: 'Alderaan 2' }
+	{ artist: 'Nitrous Oxide', title: 'Alderaan 3' },
+	{ artist: 'Nitrous Oxide', title: 'Alderaan 4' }
 ]
 
 
 searchData =[
-	{ artist: 'Nitrous Oxide', title: 'Alderaan' },
-	{ artist: 'Nitrous Oxide', title: 'Alderaan 2' }
+	{ artist: 'Nitrous Oxide', title: 'Alderaan 5' },
+	{ artist: 'Nitrous Oxide', title: 'Alderaan 6' }
 ]
 
 
@@ -39,13 +39,31 @@ $('#playlist').live 'pagebeforecreate', () ->
 	$.link.playlistItem '#playlistItems', playlistData
 	#$.observable(playlistData).insert playlistData.length, { artist: 'Michiel', title: 'Track 3' }
 
+
+addTrackToPlaylist = (e) ->
+		$(e).toggleClass 'addTrack trackAdded'
+		$.observable(playlistData).insert playlistData.length, $.view($(e).parent().parent()).data
+		newTrack = $('#playlistItems li:last').addClass 'new'
+		setTimeout ( ->
+			newTrack.removeClass 'new'
+		), 3000
+
 $('#addTrack').live 'pagebeforecreate', () ->	
 	$('#searchSubmit').bind 'click', (e) ->
 		$('#searchResults').css 'display', 'block'
 
 	$('#searchItems .addTrack').live 'click', (e) ->
+		addTrackToPlaylist(this)
+		###
 		$(this).toggleClass 'addTrack trackAdded'
+		$.observable(playlistData).insert playlistData.length, $.view($(this).parent().parent()).data
+		newTrack = $('#playlistItems li:last').addClass 'new'
+		setTimeout ( ->
+			newTrack.removeClass 'new'
+		), 3000
+		###
 		false
+
 
 	$.templates { searchItem: '#searchItem' }
 	$.link.searchItem '#searchItems', searchData
@@ -53,8 +71,15 @@ $('#addTrack').live 'pagebeforecreate', () ->
 
 $('#getSuggestions').live 'pagebeforecreate', () ->	
 	$('#suggestionItems .addTrack').live 'click', (e) ->
-		#console.log $(this)
+		addTrackToPlaylist(this)
+		###
 		$(this).toggleClass 'addTrack trackAdded'
+		$.observable(playlistData).insert playlistData.length, $.view($(this).parent().parent()).data
+		newTrack = $('#playlistItems li:last').addClass 'new'
+		setTimeout ( ->
+			newTrack.removeClass 'new'
+		), 3000
+		###
 		false
 	
 	$.templates { suggestionItem: '#suggestionItem' }

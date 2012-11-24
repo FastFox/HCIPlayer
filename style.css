@@ -130,7 +130,7 @@
   border-top: 0;
   border-bottom-color: #CCCCCC;
 }
-.list li .new {
+.list li.new h2 {
   -moz-box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
   -webkit-box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
   box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
@@ -159,7 +159,4 @@
   -moz-border-radius-bottomleft: .6em;
   -webkit-border-bottom-left-radius: .6em;
   border-bottom-left-radius: .6em;
-}
-#searchResults {
-  display: none;
 }
