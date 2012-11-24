@@ -36,7 +36,7 @@
 			<li class="closed">
 				<h2>
 						<span class="collapser"> </span>
-						<span class="track">{{>artist}} – {{>title}}</span>
+						<span class="track">{{>artist_name}} – {{>title}}</span>
 						<span class="thumbup"> </span>
 						<span class="thumbdown"> </span>
 				</h2>
@@ -76,10 +76,11 @@
         <li class="closed">
 					<h2>
 							<span class="collapser"> </span>
-							<span class="track">{{>artist}} – {{>title}}</span>
+							<span class="track">{{>artist_name}} – {{>title}}</span>
 							<span class="addTrack"> </span>
 					</h2>
 					<div class="info">
+						{{>tracks[0].foreign_id}} <br />
 						Album: Dreamcatcher <br />
 						Tags: Trance, Progressive <br />
 						Score: + 2 - 1

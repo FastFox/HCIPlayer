@@ -1,23 +1,15 @@
-playlistData = [
-	{ spotify: 123, artist: 'Nitrous Oxide', title: 'Alderaan' },
-	{ spotify: 234, artist: 'Nitrous Oxide', title: 'Alderaan 2' }
-]
+playlistData = []
 
-suggestionData =[
-	{ spotify: 3, artist: 'Nitrous Oxide', title: 'Alderaan 3' },
-	{ spotify: 4, artist: 'Nitrous Oxide', title: 'Alderaan 4' }
-]
+suggestionData = []
 
-
-searchData =[
-	{ spotify: 5, artist: 'Nitrous Oxide', title: 'Alderaan 5' },
-	{ spotify: 6, artist: 'Nitrous Oxide', title: 'Alderaan 6' }
-]
-
+searchData = []
 
 $(document).ready () ->
 	$('ul.list li').live 'click', (e) ->
 		$(this).toggleClass('open closed').parent().children('.open').not(this).toggleClass 'open closed'
+	
+	socket = io.connect 'http://localhost'
+	
 
 $('#playlist').live 'pagebeforecreate', () ->	
 	$('#playlistItems .thumbup').live 'click', (e) ->
@@ -45,24 +37,25 @@ addTrackToPlaylist = (e) ->
 			newTrack.removeClass 'new'
 		), 3000
 
+		if
+
 $('#addTrack').live 'pagebeforecreate', () ->	
 	$('#searchSubmit').bind 'click', (e) ->
 		$('#searchResults').css 'display', 'block'
 	
-		doei = { lol: 'bla' }
-
+		
 		$.ajax {
 			type: 'POST',
 			url: 'http://localhost:3000/search',
-			data: doei,
+			data: { type: 'artist', query: $('#search-basic').val() }
 			dataType: 'json', 
 			success: (data) ->
 				console.log 'hoi'
 				console.log data
+				#$.observable(searchData).data = data
+				$.observable(searchData).refresh data
+				#console.log $.observable(searchData)
 		}	
-
-
-
 
 	$('#searchItems .addTrack').live 'click', (e) ->
 		addTrackToPlaylist(this)
