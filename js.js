@@ -3,9 +3,11 @@ var addTrackToPlaylist, playlistData, searchData, suggestionData;
 
 playlistData = [
   {
+    spotify: 123,
     artist: 'Nitrous Oxide',
     title: 'Alderaan'
   }, {
+    spotify: 234,
     artist: 'Nitrous Oxide',
     title: 'Alderaan 2'
   }
@@ -13,9 +15,11 @@ playlistData = [
 
 suggestionData = [
   {
+    spotify: 3,
     artist: 'Nitrous Oxide',
     title: 'Alderaan 3'
   }, {
+    spotify: 4,
     artist: 'Nitrous Oxide',
     title: 'Alderaan 4'
   }
@@ -23,9 +27,11 @@ suggestionData = [
 
 searchData = [
   {
+    spotify: 5,
     artist: 'Nitrous Oxide',
     title: 'Alderaan 5'
   }, {
+    spotify: 6,
     artist: 'Nitrous Oxide',
     title: 'Alderaan 6'
   }

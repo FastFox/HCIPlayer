@@ -1,23 +1,22 @@
 playlistData = [
-	{ artist: 'Nitrous Oxide', title: 'Alderaan' },
-	{ artist: 'Nitrous Oxide', title: 'Alderaan 2' }
+	{ spotify: 123, artist: 'Nitrous Oxide', title: 'Alderaan' },
+	{ spotify: 234, artist: 'Nitrous Oxide', title: 'Alderaan 2' }
 ]
 
 suggestionData =[
-	{ artist: 'Nitrous Oxide', title: 'Alderaan 3' },
-	{ artist: 'Nitrous Oxide', title: 'Alderaan 4' }
+	{ spotify: 3, artist: 'Nitrous Oxide', title: 'Alderaan 3' },
+	{ spotify: 4, artist: 'Nitrous Oxide', title: 'Alderaan 4' }
 ]
 
 
 searchData =[
-	{ artist: 'Nitrous Oxide', title: 'Alderaan 5' },
-	{ artist: 'Nitrous Oxide', title: 'Alderaan 6' }
+	{ spotify: 5, artist: 'Nitrous Oxide', title: 'Alderaan 5' },
+	{ spotify: 6, artist: 'Nitrous Oxide', title: 'Alderaan 6' }
 ]
 
 
 $(document).ready () ->
 	$('ul.list li').live 'click', (e) ->
-		#console.log 'toggle'
 		$(this).toggleClass('open closed').parent().children('.open').not(this).toggleClass 'open closed'
 
 $('#playlist').live 'pagebeforecreate', () ->	
@@ -37,8 +36,6 @@ $('#playlist').live 'pagebeforecreate', () ->
 
 	$.templates { playlistItem: '#playlistItem' }
 	$.link.playlistItem '#playlistItems', playlistData
-	#$.observable(playlistData).insert playlistData.length, { artist: 'Michiel', title: 'Track 3' }
-
 
 addTrackToPlaylist = (e) ->
 		$(e).toggleClass 'addTrack trackAdded'

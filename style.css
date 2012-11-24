@@ -38,9 +38,24 @@
   background-color: #666;
   background-image: url(images/icons-18-white.png);
   background-repeat: no-repeat;
-  -moz-border-radius: 9px;
-  -webkit-border-radius: 9px;
-  border-radius: 9px;
+  /*
+				-moz-border-radius: 9px;
+				-webkit-border-radius: 9px;
+				border-radius: 9px;
+				*/
+
+  -webkit-border-top-right-radius: 9px;
+  -moz-border-radius-topright: 9px;
+  border-top-right-radius: 9px;
+  -webkit-border-top-left-radius: 9px;
+  -moz-border-radius-topleft: 9px;
+  border-top-left-radius: 9px;
+  -webkit-border-bottom-right-radius: 9px;
+  -moz-border-radius-bottomright: 9px;
+  border-bottom-right-radius: 9px;
+  -webkit-border-bottom-left-radius: 9px;
+  -moz-border-radius-bottomleft: 9px;
+  border-bottom-left-radius: 9px;
 }
 .list li h2 .track {
   display: block;
@@ -58,9 +73,24 @@
   background-color: #666;
   background-image: url(images/icons-18-white.png);
   background-repeat: no-repeat;
-  -moz-border-radius: 9px;
-  -webkit-border-radius: 9px;
-  border-radius: 9px;
+  /*
+				-moz-border-radius: 9px;
+				-webkit-border-radius: 9px;
+				border-radius: 9px;
+				*/
+
+  -webkit-border-top-right-radius: 9px;
+  -moz-border-radius-topright: 9px;
+  border-top-right-radius: 9px;
+  -webkit-border-top-left-radius: 9px;
+  -moz-border-radius-topleft: 9px;
+  border-top-left-radius: 9px;
+  -webkit-border-bottom-right-radius: 9px;
+  -moz-border-radius-bottomright: 9px;
+  border-bottom-right-radius: 9px;
+  -webkit-border-bottom-left-radius: 9px;
+  -moz-border-radius-bottomleft: 9px;
+  border-bottom-left-radius: 9px;
   margin-top: -24px;
   right: 48px;
   background-position: 0px 50%;
@@ -74,9 +104,24 @@
   background-color: #666;
   background-image: url(images/icons-18-white.png);
   background-repeat: no-repeat;
-  -moz-border-radius: 9px;
-  -webkit-border-radius: 9px;
-  border-radius: 9px;
+  /*
+				-moz-border-radius: 9px;
+				-webkit-border-radius: 9px;
+				border-radius: 9px;
+				*/
+
+  -webkit-border-top-right-radius: 9px;
+  -moz-border-radius-topright: 9px;
+  border-top-right-radius: 9px;
+  -webkit-border-top-left-radius: 9px;
+  -moz-border-radius-topleft: 9px;
+  border-top-left-radius: 9px;
+  -webkit-border-bottom-right-radius: 9px;
+  -moz-border-radius-bottomright: 9px;
+  border-bottom-right-radius: 9px;
+  -webkit-border-bottom-left-radius: 9px;
+  -moz-border-radius-bottomleft: 9px;
+  border-bottom-left-radius: 9px;
   margin-top: -24px;
   right: 16px;
   background-position: -36px 50%;
@@ -90,9 +135,24 @@
   background-color: #666;
   background-image: url(images/icons-18-white.png);
   background-repeat: no-repeat;
-  -moz-border-radius: 9px;
-  -webkit-border-radius: 9px;
-  border-radius: 9px;
+  /*
+				-moz-border-radius: 9px;
+				-webkit-border-radius: 9px;
+				border-radius: 9px;
+				*/
+
+  -webkit-border-top-right-radius: 9px;
+  -moz-border-radius-topright: 9px;
+  border-top-right-radius: 9px;
+  -webkit-border-top-left-radius: 9px;
+  -moz-border-radius-topleft: 9px;
+  border-top-left-radius: 9px;
+  -webkit-border-bottom-right-radius: 9px;
+  -moz-border-radius-bottomright: 9px;
+  border-bottom-right-radius: 9px;
+  -webkit-border-bottom-left-radius: 9px;
+  -moz-border-radius-bottomleft: 9px;
+  border-bottom-left-radius: 9px;
   background-position: 0 50%;
   margin-top: -24px;
   right: 16px;
@@ -106,12 +166,30 @@
   background-color: #666;
   background-image: url(images/icons-18-white.png);
   background-repeat: no-repeat;
-  -moz-border-radius: 9px;
-  -webkit-border-radius: 9px;
-  border-radius: 9px;
+  /*
+				-moz-border-radius: 9px;
+				-webkit-border-radius: 9px;
+				border-radius: 9px;
+				*/
+
+  -webkit-border-top-right-radius: 9px;
+  -moz-border-radius-topright: 9px;
+  border-top-right-radius: 9px;
+  -webkit-border-top-left-radius: 9px;
+  -moz-border-radius-topleft: 9px;
+  border-top-left-radius: 9px;
+  -webkit-border-bottom-right-radius: 9px;
+  -moz-border-radius-bottomright: 9px;
+  border-bottom-right-radius: 9px;
+  -webkit-border-bottom-left-radius: 9px;
+  -moz-border-radius-bottomleft: 9px;
+  border-bottom-left-radius: 9px;
   background-position: -252px 50%;
   margin-top: -24px;
   right: 16px;
+  -moz-box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
+  -webkit-box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
+  box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
 }
 .list li.open h2 .collapser {
   background-position: -216px 50%;
@@ -134,29 +212,67 @@
   -moz-box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
   -webkit-box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
   box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
+  /*
+			-moz-box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
+			-webkit-box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
+			box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
+			*/
+
 }
 .list li:first-child h2 {
   border-top: 1px solid #CCCCCC;
-  -moz-border-radius-topright: .6em;
-  -webkit-border-top-right-radius: .6em;
-  border-top-right-radius: .6em;
-  -moz-border-radius-topleft: .6em;
-  -webkit-border-top-left-radius: .6em;
-  border-top-left-radius: .6em;
+  /*
+		-moz-border-radius-topright: .6em; 
+		-webkit-border-top-right-radius: .6em;
+		border-top-right-radius: .6em;
+		-moz-border-radius-topleft: .6em; 
+		-webkit-border-top-left-radius: .6em;
+		border-top-left-radius: .6em;
+		*/
+
+  -webkit-border-top-right-radius: 9px;
+  -moz-border-radius-topright: 9px;
+  border-top-right-radius: 9px;
+  -webkit-border-top-left-radius: 9px;
+  -moz-border-radius-topleft: 9px;
+  border-top-left-radius: 9px;
 }
 .list li:last-child.closed h2 {
-  -moz-border-radius-bottomright: .6em;
-  -webkit-border-bottom-right-radius: .6em;
-  border-bottom-right-radius: .6em;
-  -moz-border-radius-bottomleft: .6em;
-  -webkit-border-bottom-left-radius: .6em;
-  border-bottom-left-radius: .6em;
+  /* 
+		-moz-border-radius-bottomright: .6em; 
+		-webkit-border-bottom-right-radius: .6em;
+		border-bottom-right-radius: .6em;
+		-moz-border-radius-bottomleft: .6em; 
+		-webkit-border-bottom-left-radius: .6em;
+		border-bottom-left-radius: .6em;
+		*/
+
+  -webkit-border-bottom-right-radius: 9px;
+  -moz-border-radius-bottomright: 9px;
+  border-bottom-right-radius: 9px;
+  -webkit-border-bottom-left-radius: 9px;
+  -moz-border-radius-bottomleft: 9px;
+  border-bottom-left-radius: 9px;
 }
 .list li:last-child .info {
-  -moz-border-radius-bottomright: .6em;
-  -webkit-border-bottom-right-radius: .6em;
-  border-bottom-right-radius: .6em;
-  -moz-border-radius-bottomleft: .6em;
-  -webkit-border-bottom-left-radius: .6em;
-  border-bottom-left-radius: .6em;
+  /*
+		-moz-border-radius-bottomright: .6em; 
+		-webkit-border-bottom-right-radius: .6em;
+		border-bottom-right-radius: .6em;
+		-moz-border-radius-bottomleft: .6em; 
+		-webkit-border-bottom-left-radius: .6em;
+		border-bottom-left-radius: .6em;
+		*/
+
+  -webkit-border-bottom-right-radius: 9px;
+  -moz-border-radius-bottomright: 9px;
+  border-bottom-right-radius: 9px;
+  -webkit-border-bottom-left-radius: 9px;
+  -moz-border-radius-bottomleft: 9px;
+  border-bottom-left-radius: 9px;
+}
+ul#playlistItems li:first-child h2 {
+  -moz-box-shadow: inset 0px 0px 3px #f4c63f, 0px 0px 9px #f4c63f;
+  -webkit-box-shadow: inset 0px 0px 3px #f4c63f, 0px 0px 9px #f4c63f;
+  box-shadow: inset 0px 0px 3px #f4c63f, 0px 0px 9px #f4c63f;
 }
