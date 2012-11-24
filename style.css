@@ -10,13 +10,13 @@
   right: 10px;
   margin-top: -22px;
 }
-#suggestionItems {
+.list {
   padding: 0;
 }
-#suggestionItems li {
+.list li {
   list-style-type: none;
 }
-#suggestionItems li h2 {
+.list li h2 {
   margin: 0;
   height: 30px;
   line-height: 30px;
@@ -29,7 +29,7 @@
   background: linear-gradient(#ffffff, #f1f1f1) repeat scroll 0 0 #eeeeee;
   white-space: nowrap;
 }
-#suggestionItems li h2 .collapser {
+.list li h2 .collapser {
   position: absolute;
   margin: 6px;
   width: 18px;
@@ -42,14 +42,14 @@
   -webkit-border-radius: 9px;
   border-radius: 9px;
 }
-#suggestionItems li h2 .track {
+.list li h2 .track {
   display: block;
   padding: 0 56px 0 32px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-#suggestionItems li h2 .thumbup {
+.list li h2 .thumbup {
   position: absolute;
   margin: 6px;
   width: 18px;
@@ -65,7 +65,7 @@
   right: 48px;
   background-position: 0px 50%;
 }
-#suggestionItems li h2 .thumbdown {
+.list li h2 .thumbdown {
   position: absolute;
   margin: 6px;
   width: 18px;
@@ -81,29 +81,61 @@
   right: 16px;
   background-position: -36px 50%;
 }
-#suggestionItems li.open h2 .collapser {
+.list li h2 .addTrack {
+  position: absolute;
+  margin: 6px;
+  width: 18px;
+  height: 18px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  background-color: #666;
+  background-image: url(images/icons-18-white.png);
+  background-repeat: no-repeat;
+  -moz-border-radius: 9px;
+  -webkit-border-radius: 9px;
+  border-radius: 9px;
+  background-position: 0 50%;
+  margin-top: -24px;
+  right: 16px;
+}
+.list li h2 .trackAdded {
+  position: absolute;
+  margin: 6px;
+  width: 18px;
+  height: 18px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  background-color: #666;
+  background-image: url(images/icons-18-white.png);
+  background-repeat: no-repeat;
+  -moz-border-radius: 9px;
+  -webkit-border-radius: 9px;
+  border-radius: 9px;
+  background-position: -252px 50%;
+  margin-top: -24px;
+  right: 16px;
+}
+.list li.open h2 .collapser {
   background-position: -216px 50%;
 }
-#suggestionItems li.open .info {
+.list li.open .info {
   display: block;
 }
-#suggestionItems li.closed h2 .collapser {
+.list li.closed h2 .collapser {
   background-position: -108px 50%;
 }
-#suggestionItems li.closed .info {
+.list li.closed .info {
   display: none;
 }
-#suggestionItems li .info {
+.list li .info {
   border: 1px solid #999999;
   border-top: 0;
   border-bottom-color: #CCCCCC;
 }
-#suggestionItems li .new {
+.list li .new {
   -moz-box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
   -webkit-box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
   box-shadow: inset 0px 0px 3px #387bbe, 0px 0px 9px #387bbe;
 }
-#suggestionItems li:first-child h2 {
+.list li:first-child h2 {
   border-top: 1px solid #CCCCCC;
   -moz-border-radius-topright: .6em;
   -webkit-border-top-right-radius: .6em;
@@ -112,7 +144,7 @@
   -webkit-border-top-left-radius: .6em;
   border-top-left-radius: .6em;
 }
-#suggestionItems li:last-child.closed h2 {
+.list li:last-child.closed h2 {
   -moz-border-radius-bottomright: .6em;
   -webkit-border-bottom-right-radius: .6em;
   border-bottom-right-radius: .6em;
@@ -120,7 +152,7 @@
   -webkit-border-bottom-left-radius: .6em;
   border-bottom-left-radius: .6em;
 }
-#suggestionItems li:last-child .info {
+.list li:last-child .info {
   -moz-border-radius-bottomright: .6em;
   -webkit-border-bottom-right-radius: .6em;
   border-bottom-right-radius: .6em;
