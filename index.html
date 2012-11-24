@@ -105,15 +105,11 @@
 	  </div>
   </div>
 
-	<div data-role="content">	
-
-    <div id="suggestions">
-
-      <ul id="suggestionItems" class="list">
+	<script id="suggestionItem" type="text/x-jsrender">
         <li class="closed">
 					<h2>
 							<span class="collapser"> </span>
-							<span class="track">Nitrous Oxide – Alderaan</span>
+							<span class="track">{{>artist}} – {{>title}}</span>
 							<span class="addTrack"> </span>
 					</h2>
 					<div class="info">
@@ -122,16 +118,13 @@
 						Score: + 2 - 1
 					</div>
 				</li>
-	 			<li class="closed">
-					<h2>
-							<span class="collapser"> </span>
-							<span class="track">Nitrous Oxide – Alderaan</span>
-							<span class="addTrack"> </span>
-					</h2>
-					<div class="info">
-						doei
-					</div>
-				</li>
+	</script>
+
+	<div data-role="content">	
+
+    <div id="suggestions">
+
+      <ul id="suggestionItems" class="list">
 
       </ul>
 

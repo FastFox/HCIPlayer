@@ -3,6 +3,11 @@ playlistData = [
 	{ artist: 'Nitrous Oxide', title: 'Alderaan 2' }
 ]
 
+suggestionData =[
+	{ artist: 'Nitrous Oxide', title: 'Alderaan' },
+	{ artist: 'Nitrous Oxide', title: 'Alderaan 2' }
+]
+
 $(document).ready () ->
 	$('ul.list li').live 'click', (e) ->
 		#console.log 'toggle'
@@ -25,13 +30,14 @@ $('#playlist').live 'pagebeforecreate', () ->
 
 	$.templates { playlistItem: '#playlistItem' }
 	$.link.playlistItem '#playlistItems', playlistData
-
-	$.observable(playlistData).insert playlistData.length, { artist: 'Michiel', title: 'Track 3' }
+	#$.observable(playlistData).insert playlistData.length, { artist: 'Michiel', title: 'Track 3' }
 
 $('#getSuggestions').live 'pagebeforecreate', () ->	
 	$('#suggestionItems .addTrack').live 'click', (e) ->
 		#console.log $(this)
 		$(this).toggleClass 'addTrack trackAdded'
 		false
-		
+	
+	$.templates { suggestionItem: '#suggestionItem' }
+	$.link.suggestionItem '#suggestionItems', suggestionData
 
