@@ -1,6 +1,9 @@
-#$(document).bind 'pageinit', () ->
+playlistData = [
+	{ artist: 'Nitrous Oxide', title: 'Alderaan' },
+	{ artist: 'Nitrous Oxide', title: 'Alderaan 2' }
+]
+
 $(document).ready () ->
-	console.log 'hoi'
 	$('ul.list li').live 'click', (e) ->
 		#console.log 'toggle'
 		$(this).toggleClass('open closed').parent().children('.open').not(this).toggleClass 'open closed'
@@ -19,6 +22,11 @@ $('#playlist').live 'pagebeforecreate', () ->
 		else
 			console.log 'Dislike toevoegen'
 		false
+
+	$.templates { playlistItem: '#playlistItem' }
+	$.link.playlistItem '#playlistItems', playlistData
+
+	$.observable(playlistData).insert playlistData.length, { artist: 'Michiel', title: 'Track 3' }
 
 $('#getSuggestions').live 'pagebeforecreate', () ->	
 	$('#suggestionItems .addTrack').live 'click', (e) ->
