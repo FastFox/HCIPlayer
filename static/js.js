@@ -39,7 +39,7 @@ addTrackToPlaylist = function(e) {
   setTimeout((function() {
     return newTrack.removeClass('new');
   }), 3000);
-  console.log('hoi');
+  console.log('hoi', socket);
   return socket.emit('addTrack', data);
 };
 

@@ -15,6 +15,7 @@ nest = new echonest.Echonest { api_key: 'PCG7Z9OEOD91S20SU' }
 io.on 'connection', (socket) ->
 	#console.log socket
 	socket.on 'addTrack', (data) ->
+		socket.broadcast.emit 'newTrack', data
 		console.log data
 
 ###

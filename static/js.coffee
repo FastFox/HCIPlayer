@@ -40,7 +40,7 @@ addTrackToPlaylist = (e) ->
 			newTrack.removeClass 'new'
 		), 3000
 	
-		console.log 'hoi'
+		console.log 'hoi', socket
 		socket.emit 'addTrack', data	
 
 
