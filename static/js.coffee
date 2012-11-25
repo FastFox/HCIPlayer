@@ -78,7 +78,20 @@ $('#addTrack').live 'pagebeforecreate', () ->
 	$.link.searchItem '#searchItems', searchData
 	
 
-$('#getSuggestions').live 'pagebeforecreate', () ->	
+$('#getSuggestions').live 'pagebeforecreate', () ->
+	$.ajax {
+			type: 'POST',
+			url: 'http://localhost:3000/suggestions',
+			data: { }
+			dataType: 'json', 
+			success: (data) ->
+				#console.log 'hoi'
+				#console.log data
+				#$.observable(searchData).data = data
+				$.observable(suggestionData).refresh data
+				#console.log $.observable(searchData)
+	}	
+
 	$('#suggestionItems .addTrack').live 'click', (e) ->
 		addTrackToPlaylist(this)
 		###

@@ -88,3 +88,23 @@ app.post '/search', (req, res) ->
 ###
 #
 #app.listen 3000
+
+
+app.post '/suggestions', (req, res) ->
+	#console.log req.body
+	nest.song.search { 
+		results: '25',
+		sort: 'song_hotttnesss-desc',
+		bucket: ['id:spotify-WW', 'tracks']
+	}, (error, response) ->
+		#console.log response
+		#console.log response.songs, 'hoi'
+		
+		## Verwijder alle tracks met 0 spotify tracks
+		`for( i = 0; i < response.songs.length; i++ ) {
+			if( response.songs[i].tracks.length === 0 ) {
+				response.songs.splice(i, 1);
+				i--;
+			}
+		}`
+		res.json response.songs

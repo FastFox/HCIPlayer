@@ -79,6 +79,15 @@ $('#addTrack').live('pagebeforecreate', function() {
 });
 
 $('#getSuggestions').live('pagebeforecreate', function() {
+  $.ajax({
+    type: 'POST',
+    url: 'http://localhost:3000/suggestions',
+    data: {},
+    dataType: 'json',
+    success: function(data) {
+      return $.observable(suggestionData).refresh(data);
+    }
+  });
   $('#suggestionItems .addTrack').live('click', function(e) {
     addTrackToPlaylist(this);
     /*
