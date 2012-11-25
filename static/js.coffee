@@ -13,17 +13,19 @@ $(document).ready () ->
 
 $('#playlist').live 'pagebeforecreate', () ->	
 	$('#playlistItems .thumbup').live 'click', (e) ->
-		if $(this).hasClass 'liked'
-			console.log 'Like weghalen'
-		else
-			console.log 'Like toevoegen'
+		$(this).toggleClass 'liked'
+		#if $(this).hasClass 'liked'
+		#	console.log 'Like weghalen'
+		#else
+		#	console.log 'Like toevoegen'
 		false
 
 	$('#playlistItems .thumbdown').live 'click', (e) ->
-		if $(this).hasClass 'disliked'
-			console.log 'Dislike weghalen'
-		else
-			console.log 'Dislike toevoegen'
+		$(this).toggleClass 'disliked'
+		#if $(this).hasClass 'disliked'
+		#	console.log 'Dislike weghalen'
+		#else
+		#	console.log 'Dislike toevoegen'
 		false
 
 	$.templates { playlistItem: '#playlistItem' }

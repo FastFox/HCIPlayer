@@ -89,30 +89,33 @@
 			}
 			.thumb() {
 				position: absolute;
-				.icon;
-				margin-top: -24px;
+				//.icon;
+				//background-color: none;
+				width: 22px;
+				height: 22px;
+				margin-top: -26px;
 			}
 			.thumbup {
 				.thumb;
-				right: 48px;
-				background-position: 0px 50%;
+				right: 54px;
+				//background-position: 0px 50%;
+				background-image: url(images/thumbs_up.png);
+				//background-position: 0;
 			}
 			.thumbup.liked {
-
+				.thumb;
+				right: 54px;
+				background-image: url(images/thumbs_up_clicked.png);
 			}
-			.thumbup.disliked {
-
+			.thumbdown.disliked {
+				.thumb;
+				right: 24px;
+				background-image: url(images/thumbs_down_clicked.png);
 			}
 			.thumbdown {
 				.thumb;
-				right: 16px;
-				background-position: -36px 50%;
-			}
-			.thumbdown.liked {
-
-			}
-			.thumbdown.disliked {
-
+				right: 24px;
+				background-image: url(images/thumbs_down.png);
 			}
 			.addTrack {
 				position: absolute;

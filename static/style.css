@@ -66,65 +66,35 @@
 }
 .list li h2 .thumbup {
   position: absolute;
-  margin: 6px;
-  width: 18px;
-  height: 18px;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
-  background-color: #666;
-  background-image: url(images/icons-18-white.png);
-  background-repeat: no-repeat;
-  /*
-				-moz-border-radius: 9px;
-				-webkit-border-radius: 9px;
-				border-radius: 9px;
-				*/
-
-  -webkit-border-top-right-radius: 9px;
-  -moz-border-radius-topright: 9px;
-  border-top-right-radius: 9px;
-  -webkit-border-top-left-radius: 9px;
-  -moz-border-radius-topleft: 9px;
-  border-top-left-radius: 9px;
-  -webkit-border-bottom-right-radius: 9px;
-  -moz-border-radius-bottomright: 9px;
-  border-bottom-right-radius: 9px;
-  -webkit-border-bottom-left-radius: 9px;
-  -moz-border-radius-bottomleft: 9px;
-  border-bottom-left-radius: 9px;
-  margin-top: -24px;
-  right: 48px;
-  background-position: 0px 50%;
+  width: 22px;
+  height: 22px;
+  margin-top: -26px;
+  right: 54px;
+  background-image: url(images/thumbs_up.png);
+}
+.list li h2 .thumbup.liked {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  margin-top: -26px;
+  right: 54px;
+  background-image: url(images/thumbs_up_clicked.png);
+}
+.list li h2 .thumbdown.disliked {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  margin-top: -26px;
+  right: 24px;
+  background-image: url(images/thumbs_down_clicked.png);
 }
 .list li h2 .thumbdown {
   position: absolute;
-  margin: 6px;
-  width: 18px;
-  height: 18px;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
-  background-color: #666;
-  background-image: url(images/icons-18-white.png);
-  background-repeat: no-repeat;
-  /*
-				-moz-border-radius: 9px;
-				-webkit-border-radius: 9px;
-				border-radius: 9px;
-				*/
-
-  -webkit-border-top-right-radius: 9px;
-  -moz-border-radius-topright: 9px;
-  border-top-right-radius: 9px;
-  -webkit-border-top-left-radius: 9px;
-  -moz-border-radius-topleft: 9px;
-  border-top-left-radius: 9px;
-  -webkit-border-bottom-right-radius: 9px;
-  -moz-border-radius-bottomright: 9px;
-  border-bottom-right-radius: 9px;
-  -webkit-border-bottom-left-radius: 9px;
-  -moz-border-radius-bottomleft: 9px;
-  border-bottom-left-radius: 9px;
-  margin-top: -24px;
-  right: 16px;
-  background-position: -36px 50%;
+  width: 22px;
+  height: 22px;
+  margin-top: -26px;
+  right: 24px;
+  background-image: url(images/thumbs_down.png);
 }
 .list li h2 .addTrack {
   position: absolute;

@@ -30,12 +30,36 @@ spotify.get  '/lookup/1/.json?uri=spotify:artist:4YrKBkKSVeqDamzBPWVnSJ', (err, 
 #url = 'http://ws.spotify.com/lookup/1/.json?uri=spotify:artist:4YrKBkKSVeqDamzBPWVnSJ&extras=album'
 
 app.post '/search', (req, res) ->
+	#console.log req.body
 	nest.song.search { 
-		combined: 'Above & beyond Good for me',
-		results: '3',
+		combined: req.body.query,
+		results: '15',
+		sort: 'song_hotttnesss-desc',
 		bucket: ['id:spotify-WW', 'tracks']
 	}, (error, response) ->
+		console.log error
+		#console.log response
+		#console.log response.songs, 'hoi'
+		
+		## Verwijder alle tracks met 0 spotify tracks
+		`for( i = 0; i < response.songs.length; i++ ) {
+			if( response.songs[i].tracks.length === 0 ) {
+				response.songs.splice(i, 1);
+				i--;
+			}
+		}`
+		##		#for i = 0; i < response.songs.length; i++
+	
+			#console.log i
+
+		console.log response.songs
+
 		#for sIndex, sData of response.songs
+		#	if sData.tracks.length is 0
+		#		console.log sData.tracks.length, sIndex
+		#		response.songs.splice sIndex, 1
+		#	else
+		#		console.log sData.tracks.length, 'length'
 			#console.log sData
 			#for tIndex, tData of sData.tracks
 				#console.log tData
@@ -43,6 +67,7 @@ app.post '/search', (req, res) ->
 				#spotify.lookup { type: 'track', id: tData.foreign_id.replace('spotify-WW:track:', '') }, (err, res) ->
 				#if track.
 				#	console.log res
+		#console.log response.songs
 
 		res.json response.songs
 	#res.json { bla: 'hoi' }

@@ -17,19 +17,11 @@ $(document).ready(function() {
 
 $('#playlist').live('pagebeforecreate', function() {
   $('#playlistItems .thumbup').live('click', function(e) {
-    if ($(this).hasClass('liked')) {
-      console.log('Like weghalen');
-    } else {
-      console.log('Like toevoegen');
-    }
+    $(this).toggleClass('liked');
     return false;
   });
   $('#playlistItems .thumbdown').live('click', function(e) {
-    if ($(this).hasClass('disliked')) {
-      console.log('Dislike weghalen');
-    } else {
-      console.log('Dislike toevoegen');
-    }
+    $(this).toggleClass('disliked');
     return false;
   });
   $.templates({
