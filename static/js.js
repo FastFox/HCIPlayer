@@ -58,7 +58,7 @@ $('#playlist').live('pagebeforecreate', function() {
 
 $('#addTrack').live('pagebeforecreate', function() {
   $('#searchSubmit').bind('click', function(e) {
-    $('#searchResults').css('display', 'block');
+    $.mobile.loading('show');
     return $.ajax({
       type: 'POST',
       url: 'http://localhost:3000/search',
@@ -68,7 +68,9 @@ $('#addTrack').live('pagebeforecreate', function() {
       },
       dataType: 'json',
       success: function(data) {
-        return $.observable(searchData).refresh(data);
+        $.observable(searchData).refresh(data);
+        $('#searchResults').css('display', 'block');
+        return $.mobile.loading('hide');
       }
     });
   });

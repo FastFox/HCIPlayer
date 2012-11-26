@@ -10,6 +10,9 @@
   right: 10px;
   margin-top: -22px;
 }
+.ui-title {
+  margin: 0.6em 0px 0.6em !important;
+}
 .list {
   padding: 0;
 }
@@ -59,7 +62,7 @@
 }
 .list li h2 .track {
   display: block;
-  padding: 0 56px 0 32px;
+  padding: 0 66px 0 32px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -245,4 +248,7 @@ ul#playlistItems li:first-child h2 {
   -moz-box-shadow: inset 0px 0px 3px #f4c63f, 0px 0px 9px #f4c63f;
   -webkit-box-shadow: inset 0px 0px 3px #f4c63f, 0px 0px 9px #f4c63f;
   box-shadow: inset 0px 0px 3px #f4c63f, 0px 0px 9px #f4c63f;
+}
+#searchResults {
+  display: none;
 }

@@ -57,7 +57,7 @@ $('#playlist').live 'pagebeforecreate', () ->
 
 $('#addTrack').live 'pagebeforecreate', () ->	
 	$('#searchSubmit').bind 'click', (e) ->
-		$('#searchResults').css 'display', 'block'
+		$.mobile.loading 'show'
 		
 		$.ajax {
 			type: 'POST',
@@ -69,6 +69,8 @@ $('#addTrack').live 'pagebeforecreate', () ->
 				#console.log data
 				#$.observable(searchData).data = data
 				$.observable(searchData).refresh data
+				$('#searchResults').css 'display', 'block'
+				$.mobile.loading 'hide'
 				#console.log $.observable(searchData)
 		}	
 
