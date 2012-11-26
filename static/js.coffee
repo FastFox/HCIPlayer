@@ -6,9 +6,33 @@ searchData = []
 
 socket = io.connect 'http://localhost'
 
+addTrackToPlaylist = (e) ->
+		$(e).toggleClass 'addTrack trackAdded'
+		data = $.view($(e).parent().parent()).data
+		$.observable(playlistData).insert playlistData.length, data
+		newTrack = $('#playlistItems li:last').addClass 'new'
+		setTimeout ( ->
+			newTrack.removeClass 'new'
+		), 3000
+	
+		console.log 'hoi', socket
+		socket.emit 'addTrack', data	
+
+addTrackToPlaylistFromServer = (data) ->
+		$.observable(playlistData).insert playlistData.length, data
+		newTrack = $('#playlistItems li:last').addClass 'new'
+		setTimeout ( ->
+			newTrack.removeClass 'new'
+		), 3000
+
+
 $(document).ready () ->
 	$('ul.list li').live 'click', (e) ->
 		$(this).toggleClass('open closed').parent().children('.open').not(this).toggleClass 'open closed'
+
+	socket.on 'newTrack', (data) ->
+		addTrackToPlaylistFromServer data
+		console.log data
 	
 
 $('#playlist').live 'pagebeforecreate', () ->	
@@ -30,19 +54,6 @@ $('#playlist').live 'pagebeforecreate', () ->
 
 	$.templates { playlistItem: '#playlistItem' }
 	$.link.playlistItem '#playlistItems', playlistData
-
-addTrackToPlaylist = (e) ->
-		$(e).toggleClass 'addTrack trackAdded'
-		data = $.view($(e).parent().parent()).data
-		$.observable(playlistData).insert playlistData.length, data
-		newTrack = $('#playlistItems li:last').addClass 'new'
-		setTimeout ( ->
-			newTrack.removeClass 'new'
-		), 3000
-	
-		console.log 'hoi', socket
-		socket.emit 'addTrack', data	
-
 
 $('#addTrack').live 'pagebeforecreate', () ->	
 	$('#searchSubmit').bind 'click', (e) ->
