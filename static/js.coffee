@@ -4,7 +4,7 @@ suggestionData = []
 
 searchData = []
 
-socket = io.connect 'http://localhost'
+socket = io.connect settings.url
 
 addTrackToPlaylist = (e) ->
 		$(e).toggleClass 'addTrack trackAdded'
@@ -61,7 +61,7 @@ $('#addTrack').live 'pagebeforecreate', () ->
 		
 		$.ajax {
 			type: 'POST',
-			url: 'http://localhost:3000/search',
+			url: settings.url + '/search',
 			data: { type: 'artist', query: $('#search-basic').val() }
 			dataType: 'json', 
 			success: (data) ->
@@ -94,7 +94,7 @@ $('#addTrack').live 'pagebeforecreate', () ->
 $('#getSuggestions').live 'pagebeforecreate', () ->
 	$.ajax {
 			type: 'POST',
-			url: 'http://localhost:3000/suggestions',
+			url: settings.url + '/suggestions',
 			data: { }
 			dataType: 'json', 
 			success: (data) ->

@@ -1,9 +1,13 @@
 express = require 'express'
 spotify = require 'spotify'
 echonest = require 'echonest'
+
+settings = require './settings'
+
+console.log settings
 http = require 'http'
 app = express()
-server = app.listen 3000
+server = app.listen settings.port
 io = require('socket.io').listen server
 
 app.use express.static(__dirname+'/static')

@@ -7,7 +7,7 @@ suggestionData = [];
 
 searchData = [];
 
-socket = io.connect('http://localhost');
+socket = io.connect(settings.url);
 
 addTrackToPlaylist = function(e) {
   var data, newTrack;
@@ -61,7 +61,7 @@ $('#addTrack').live('pagebeforecreate', function() {
     $.mobile.loading('show');
     return $.ajax({
       type: 'POST',
-      url: 'http://localhost:3000/search',
+      url: settings.url + '/search',
       data: {
         type: 'artist',
         query: $('#search-basic').val()
@@ -96,7 +96,7 @@ $('#addTrack').live('pagebeforecreate', function() {
 $('#getSuggestions').live('pagebeforecreate', function() {
   $.ajax({
     type: 'POST',
-    url: 'http://localhost:3000/suggestions',
+    url: settings.url + '/suggestions',
     data: {},
     dataType: 'json',
     success: function(data) {
