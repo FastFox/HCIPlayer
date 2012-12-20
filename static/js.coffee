@@ -25,14 +25,39 @@ addTrackToPlaylistFromServer = (data) ->
 			newTrack.removeClass 'new'
 		), 3000
 
+socket.on 'setTitle', (title) ->
+	$('.title').text title
 
 $(document).ready () ->
+
+	# Load playlist
+	
+
+	# set title
+	if playlistData.length == 0
+		$('.title').text 'HCIPlayer'
+	else
+		$('.title').text playlistData
+
+	# events
+
 	$('ul.list li').live 'click', (e) ->
 		$(this).toggleClass('open closed').parent().children('.open').not(this).toggleClass 'open closed'
 
 	socket.on 'newTrack', (data) ->
 		addTrackToPlaylistFromServer data
 		console.log data
+
+	#socket.on 'getInfo', (data) ->
+		#console.log data
+		#
+	
+	socket.on 'sugTrack', (data) ->
+		#console.log data
+		#$.observable(suggestionData).refresh {}
+		$.observable(suggestionData).insert suggestionData.length, data
+
+	return true
 	
 
 $('#playlist').live 'pagebeforecreate', () ->	
@@ -90,8 +115,16 @@ $('#addTrack').live 'pagebeforecreate', () ->
 	$.templates { searchItem: '#searchItem' }
 	$.link.searchItem '#searchItems', searchData
 	
+$('#getSuggestions').live 'pageshow', () ->
+	#$.mobile.loading 'show'
 
 $('#getSuggestions').live 'pagebeforecreate', () ->
+	#console.log 'hoi!'
+	socket.emit 'reqSug'
+	#$.mobile.loading 'hide'
+
+	
+	###
 	$.ajax {
 			type: 'POST',
 			url: settings.url + '/suggestions',
@@ -104,6 +137,7 @@ $('#getSuggestions').live 'pagebeforecreate', () ->
 				$.observable(suggestionData).refresh data
 				#console.log $.observable(searchData)
 	}	
+	###
 
 	$('#suggestionItems .addTrack').live 'click', (e) ->
 		addTrackToPlaylist(this)

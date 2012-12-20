@@ -31,14 +31,27 @@ addTrackToPlaylistFromServer = function(data) {
   }), 3000);
 };
 
+socket.on('setTitle', function(title) {
+  return $('.title').text(title);
+});
+
 $(document).ready(function() {
+  if (playlistData.length === 0) {
+    $('.title').text('HCIPlayer');
+  } else {
+    $('.title').text(playlistData);
+  }
   $('ul.list li').live('click', function(e) {
     return $(this).toggleClass('open closed').parent().children('.open').not(this).toggleClass('open closed');
   });
-  return socket.on('newTrack', function(data) {
+  socket.on('newTrack', function(data) {
     addTrackToPlaylistFromServer(data);
     return console.log(data);
   });
+  socket.on('sugTrack', function(data) {
+    return $.observable(suggestionData).insert(suggestionData.length, data);
+  });
+  return true;
 });
 
 $('#playlist').live('pagebeforecreate', function() {
@@ -93,16 +106,25 @@ $('#addTrack').live('pagebeforecreate', function() {
   return $.link.searchItem('#searchItems', searchData);
 });
 
+$('#getSuggestions').live('pageshow', function() {});
+
 $('#getSuggestions').live('pagebeforecreate', function() {
-  $.ajax({
-    type: 'POST',
-    url: settings.url + '/suggestions',
-    data: {},
-    dataType: 'json',
-    success: function(data) {
-      return $.observable(suggestionData).refresh(data);
-    }
-  });
+  socket.emit('reqSug');
+  /*
+  	$.ajax {
+  			type: 'POST',
+  			url: settings.url + '/suggestions',
+  			data: { }
+  			dataType: 'json', 
+  			success: (data) ->
+  				#console.log 'hoi'
+  				#console.log data
+  				#$.observable(searchData).data = data
+  				$.observable(suggestionData).refresh data
+  				#console.log $.observable(searchData)
+  	}
+  */
+
   $('#suggestionItems .addTrack').live('click', function(e) {
     addTrackToPlaylist(this);
     /*

@@ -21,7 +21,7 @@
 
 <div data-role="page" id="playlist">
 	<div data-id="header" data-role="header" data-position="fixed">
-		<h1>Artist - Track (Now playing track)</h1>
+		<h1 class="title">Artist - Track (Now playing track)</h1>
 
     <div data-role="navbar">
 		  <ul>
@@ -61,7 +61,7 @@
 <div data-role="page" id="addTrack">
 
 	<div data-id="header" data-role="header" data-position="fixed">
-		<h1>Artist - Track (Now playing track)</h1>
+		<h1 class="title">Artist - Track (Now playing track)</h1>
 
     <div data-role="navbar">
 		  <ul>
@@ -112,7 +112,7 @@
 <div data-role="page" id="getSuggestions">
 
 	<div data-id="header" data-role="header" data-position="fixed">
-		<h1>Artist - Track (Now playing track)</h1>
+		<h1 class="title">Artist - Track (Now playing track)</h1>
 
     <div data-role="navbar">
 		  <ul>
@@ -123,7 +123,7 @@
 	  </div>
   </div>
 
-	<script id="suggestionItem" type="text/x-jsrender">
+	<script id="suggestionItem_oud" type="text/x-jsrender">
         <li class="closed">
 					<h2>
 							<span class="collapser"> </span>
@@ -132,6 +132,21 @@
 					</h2>
 					<div class="info">
 						Album: Dreamcatcher <br />
+						Tags: Trance, Progressive <br />
+						Score: + 2 - 1
+					</div>
+				</li>
+	</script>
+
+	<script id="suggestionItem" type="text/x-jsrender">
+        <li class="closed">
+					<h2>
+							<span class="collapser"> </span>
+							<span class="track">{{>artist}} – {{>title}}</span>
+							<span class="addTrack"> </span>
+					</h2>
+					<div class="info">
+						Album: {{>album}} <br />
 						Tags: Trance, Progressive <br />
 						Score: + 2 - 1
 					</div>
