@@ -20,15 +20,25 @@
 	<body> 
 
 <div data-role="page" id="playlist">
+	
+	<div data-role="popup" id="settings" class="ui-content">
+		<ul data-role="listview">
+			<li data-icon="gear" data-role="list-divider">Playlist sorting</li>
+			<li><a href="#">Chronological</a></li>
+			<li><a href="#">Alphabetic</a></li>
+			<li><a href="#">Algorithm A</a></li>
+		</ul>
+	</div>
+
 	<div data-id="header" data-role="header" data-position="fixed">
 		<h1 class="title">Artist - Track (Now playing track)</h1>
+		<a href="#settings" data-rel="popup" data-position-to="window" data-transition="pop" data-icon="gear" data-iconpos="notext" class="ui-btn-right"></a>
 
     <div data-role="navbar">
 		  <ul>
 			  <li><a class="ui-btn-active ui-state-persist" href="#playlist">Playlist</a></li>
 			  <li><a href="#addTrack">Add track</a></li>
 			  <li><a href="#getSuggestions">Get suggestions</a></li>
-			  <li><a data-role="button" data-icon="gear" data-iconpos="notext"></a></li>
 		  </ul>
 	  </div>
 	</div>
