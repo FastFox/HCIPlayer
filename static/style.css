@@ -252,3 +252,11 @@ ul#playlistItems li:first-child h2 {
 #searchResults {
   display: none;
 }
+[data-role="navbar"] .ui-navbar li {
+  color: red;
+  padding-top: 0px;
+}
+.ui-navbar .ui-btn-inner {
+  padding-bottom: 0.8em !important;
+  padding-top: 0.7em !important;
+}
