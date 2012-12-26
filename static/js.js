@@ -73,6 +73,18 @@ $(document).ready(function() {
     $(this).toggleClass('open closed').parent().children('.open').not(this).toggleClass('open closed');
     return $.mobile.loading('hide');
   });
+  $('#playlist').bind('swipeleft', function(e) {
+    return $.mobile.changePage($('#addTrack'), 'none');
+  });
+  $('#addTrack').bind('swipeleft', function(e) {
+    return $.mobile.changePage($('#getSuggestions'), 'none');
+  });
+  $('#addTrack').bind('swiperight', function(e) {
+    return $.mobile.changePage($('#playlist'), 'none');
+  });
+  $('#getSuggestions').bind('swiperight', function(e) {
+    return $.mobile.changePage($('#addTrack'), 'none');
+  });
   socket.on('newTrack', function(data) {
     return console.log(data);
   });

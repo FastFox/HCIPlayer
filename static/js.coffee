@@ -70,6 +70,20 @@ $(document).ready () ->
 		$(this).toggleClass('open closed').parent().children('.open').not(this).toggleClass 'open closed'
 		$.mobile.loading 'hide'
 
+
+	# Door tabs swipen
+	$('#playlist').bind 'swipeleft', (e) ->
+		$.mobile.changePage $('#addTrack'), 'none'
+
+	$('#addTrack').bind 'swipeleft', (e) ->
+		$.mobile.changePage $('#getSuggestions'), 'none'
+
+	$('#addTrack').bind 'swiperight', (e) ->
+		$.mobile.changePage $('#playlist'), 'none'
+
+	$('#getSuggestions').bind 'swiperight', (e) ->
+		$.mobile.changePage $('#addTrack'), 'none'
+
 	socket.on 'newTrack', (data) ->
 		#addTrackToPlaylistFromServer data
 		console.log data
