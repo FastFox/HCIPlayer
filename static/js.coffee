@@ -56,19 +56,37 @@ $(document).ready () ->
 
 	# Track openklappen voor meer informatie
 	$('ul.list li').live 'click', (e) ->
-		$.mobile.loading 'show'
-		# als meer info nodig
-		if 'album' in suggestionData[ $(this).index() ] == false
-			#console.log $.mobile.activePage.attr 'id'
-			if $.mobile.activePage.attr('id') == 'getSuggestions'
-				$.observable(suggestionData[ $(this).index() ]).setProperty { album: 'bla', tags: 'blabla' }
-			else if $.mobile.activePage.attr('id') == 'addTrack'
-				$.observable(searchData[ $(this).index() ]).setProperty { album: 'bla', tags: 'blabla' }
-			else #playlist
-				$.observable(playlistData[ $(this).index() ]).setProperty { album: 'bla', tags: 'blabla' }
+		if $(this).hasClass 'open'
+			$(this).toggleClass 'open closed'
+		else
+			$.mobile.loading 'show'
+			# als meer info nodig
+			#if 'album' in suggestionData[ $(this).index() ] == false
+			#console.log suggestionData[ $(this).index() ].album
+			console.log $.mobile.activePage.attr('id') 	
 
-		$(this).toggleClass('open closed').parent().children('.open').not(this).toggleClass 'open closed'
-		$.mobile.loading 'hide'
+			that = this
+			if $.mobile.activePage.attr('id') == 'getSuggestions' and suggestionData[ $(this).index() ].album == ''
+				socket.emit 'trackInfo', $.observable(suggestionData).data()[ $(this).index() ].spotify, (data) ->
+					$.observable(suggestionData[ $(that).index() ]).setProperty { album: data.album }
+					$(that).toggleClass('open closed').parent().children('.open').not(that).toggleClass 'open closed'
+					$.mobile.loading 'hide'
+			else if $.mobile.activePage.attr('id') == 'addTrack' and searchData[ $(this).index() ].album == ''
+				console.log $.observable(searchData).data()[ $(this).index() ]
+				socket.emit 'trackInfo', $.observable(searchData).data()[ $(this).index() ].spotify, (data) ->
+					console.log data
+					$.observable(searchData[ $(that).index() ]).setProperty { album: data.album }
+					$(that).toggleClass('open closed').parent().children('.open').not(that).toggleClass 'open closed'
+					$.mobile.loading 'hide'
+			else if $.mobile.activePage.attr('id') == 'playlist' and playlistData[ $(this).index() ].album == '' 
+				socket.emit 'trackInfo', $.observable(playlistData).data()[ $(this).index() ].spotify, (data) ->
+					$.observable(playlistData[ $(that).index() ]).setProperty { album: data.album }
+					$(that).toggleClass('open closed').parent().children('.open').not(that).toggleClass 'open closed'
+					$.mobile.loading 'hide'
+			else
+				$(that).toggleClass('open closed').parent().children('.open').not(that).toggleClass 'open closed'
+				$.mobile.loading 'hide'
+
 
 
 	# Door tabs swipen
@@ -140,6 +158,8 @@ $('#addTrack').live 'pagebeforecreate', () ->
 		}	
 
 	$('#searchItems .addTrack').live 'click', (e) ->
+		if $(this).hasClass 'addTrack'
+			$(this).removeClass('addTrack').addClass 'trackAdded'
 		addTrackToPlaylist(this)
 		###
 		$(this).toggleClass 'addTrack trackAdded'
@@ -174,5 +194,5 @@ $('#getSuggestions').live 'pageinit', () ->
 	
 	$.templates { suggestionItem: '#suggestionItem' }
 	$.link.suggestionItem '#suggestionItems', suggestionData
-	$('#suggestionItems').link true, suggestionData
+	#$('#suggestionItems').link true, suggestionData
 

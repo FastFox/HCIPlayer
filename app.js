@@ -41,51 +41,65 @@ implodeArtists = function(artists) {
 };
 
 io.on('connection', function(socket) {
-  socket.emit('setTitle', 'Now playing');
   socket.on('addTrack', function(data) {
     return socket.broadcast.emit('newTrack', data);
   });
-  return socket.on('reqSug', function(fn) {
-    return nest.song.search({
-      results: '5',
-      sort: 'song_hotttnesss-desc',
-      bucket: ['id:spotify-WW', 'tracks']
-    }, function(error, response) {
-      var suggestionData;
-      suggestionData = [];
-      for( i = 0; i < response.songs.length; i++ ) {
-				if( response.songs[i].tracks.length === 0 ) {
-					//response.songs.splice(i, 1);
-					//i--;
-				} else {
-					/*
-					spotify.lookup( { type: 'track', id: response.songs[i].tracks[0].foreign_id.replace('spotify-WW:track:', '') }, function(err, res) {
-
-						//console.log(res);
-						//console.log(res.track);
-						console.log(response.songs[i]);
-						
-						socket.emit('sugTrack', { artist: implodeArtists(res.track.artists), title: res.track.name, album: res.track.name } );
-						//socket.emit('sugTrack', res);
-						//console.log(res);
-
-
-					} );
-					*/
-					
-					//console.log(response.songs[i]);
-					//console.log(i, response.songs.length
-					//socket.emit('sugTrack', { artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id, last: i == response.songs.length - 1 });
-					suggestionData.push({ artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id });
-						
-					//console.log('hoi');
-				}
-			};
-
-      fn(suggestionData);
-      return true;
+  return socket.on('trackInfo', function(id, fn) {
+    console.log(id);
+    return spotify.lookup({
+      type: 'track',
+      id: id.replace('spotify-WW:track:', '')
+    }, function(err, res) {
+      return fn({
+        album: res.track.album.name
+      });
     });
   });
+  /*
+  	socket.on 'reqSug', (fn) ->
+  		#socket.emit 'sugTrack', { 'hoi' }
+  		nest.song.search { 
+  			results: '5',
+  			sort: 'song_hotttnesss-desc',
+  			bucket: ['id:spotify-WW', 'tracks']
+  		}, (error, response) ->
+  			
+  			suggestionData = []
+  					#spotify.lookup { type: 'track', id: response.songs[0].id }, (err, res) ->
+  						#console.log res
+  			`for( i = 0; i < response.songs.length; i++ ) {
+  				if( response.songs[i].tracks.length === 0 ) {
+  					//response.songs.splice(i, 1);
+  					//i--;
+  				} else {
+  					 / *
+  					spotify.lookup( { type: 'track', id: response.songs[i].tracks[0].foreign_id.replace('spotify-WW:track:', '') }, function(err, res) {
+  
+  						//console.log(res);
+  						//console.log(res.track);
+  						console.log(response.songs[i]);
+  						
+  						socket.emit('sugTrack', { artist: implodeArtists(res.track.artists), title: res.track.name, album: res.track.name } );
+  						//socket.emit('sugTrack', res);
+  						//console.log(res);
+  
+  
+  					} );
+  					* /
+  					
+  					//console.log(response.songs[i]);
+  					//console.log(i, response.songs.length
+  					//socket.emit('sugTrack', { artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id, last: i == response.songs.length - 1 });
+  					suggestionData.push({ artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id, album: '' });
+  						
+  					//console.log('hoi');
+  				}
+  			}`
+  
+  			fn suggestionData
+  			return true
+  */
+
 });
 
 /*
@@ -95,38 +109,57 @@ spotify.get  '/lookup/1/.json?uri=spotify:artist:4YrKBkKSVeqDamzBPWVnSJ', (err, 
 
 
 app.post('/search', function(req, res) {
-  return nest.song.search({
-    combined: req.body.query,
-    results: '15',
-    sort: 'song_hotttnesss-desc',
-    bucket: ['id:spotify-WW', 'tracks']
-  }, function(error, response) {
-    console.log(error);
-    for( i = 0; i < response.songs.length; i++ ) {
-			if( response.songs[i].tracks.length === 0 ) {
-				response.songs.splice(i, 1);
-				i--;
-			}
-		};
-
-    console.log(response.songs);
-    return res.json(response.songs);
+  var tracks;
+  tracks = [];
+  return spotify.search({
+    type: 'track',
+    query: req.body.query
+  }, function(err, result) {
+    var track, _i, _len, _ref;
+    _ref = result.tracks;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      track = _ref[_i];
+      tracks.push({
+        title: track.name,
+        artist: implodeArtists(track.artists),
+        album: track.album.name
+      });
+    }
+    console.log(tracks);
+    return res.json(tracks);
   });
+  /*
+  	nest.song.search { 
+  		combined: req.body.query,
+  		results: '5',
+  		sort: 'song_hotttnesss-desc',
+  		bucket: ['id:spotify-WW', 'tracks']
+  	}, (error, response) ->
+  		console.log error
+  		#console.log response
+  
+  		tracks = []
+  		
+  		`for( i = 0; i < response.songs.length; i++ ) {
+  			if( response.songs[i].tracks.length === 0 ) {
+  				//response.songs.splice(i, 1);
+  				//i--;
+  			} else {
+  				tracks.push( { 
+  					artist: response.songs[i].artist_name,
+  					title: response.songs[i].title,
+  					spotify: response.songs[i].tracks[0].foreign_id,
+  					album: ''
+  				} );
+  			}
+  
+  		}`
+  
+  		console.log tracks
+  		res.json tracks
+  */
+
 });
-
-/*
-app.post '/search', (req, res) ->
-	console.log req.body.query, req.body.type
-	spotify.search { type: 'track',	query: req.body.query }, (err, data) ->
-		if err
-			console.log 'Error', err
-		else
-			#console.log err, data
-			res.json data.tracks.slice(0, 10);
-
-	#res.json hoi
-*/
-
 
 app.post('/suggestions', function(req, res) {
   var spotList;

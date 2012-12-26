@@ -47,12 +47,12 @@
 			<li class="closed">
 				<h2>
 						<span class="collapser"> </span>
-						<span class="track"><span data-link="artist"></span> – <span data-link="title"></span></span>
+						<span class="track">{{>artist}} – {{>title}}</span>
 						<span class="thumbup"> </span>
 						<span class="thumbdown"> </span>
 				</h2>
 				<div class="info">
-					Album: <span data-link="album"></span><br />
+					Album: {{>album}}<br />
 					Tags: Trance, Progressive <br />
 					Score: + 2 - 1
 				</div>
@@ -87,11 +87,12 @@
         <li class="closed">
 					<h2>
 							<span class="collapser"> </span>
-							<span class="track"><span data-link="artist"></span> – <span data-link="title"></span></span>
+							<span class="track">{{>artist_name}} – {{>title}}</span>
 							<span class="addTrack"> </span>
 					</h2>
 					<div class="info">
-						Album: <span data-link="album"></span> <br />
+						{{>tracks[0].foreign_id}} <br />
+						Album: Dreamcatcher <br />
 						Tags: Trance, Progressive <br />
 						Score: + 2 - 1
 					</div>
@@ -133,6 +134,21 @@
 	  </div>
   </div>
 
+	<script id="suggestionItem_oud" type="text/x-jsrender">
+        <li class="closed">
+					<h2>
+							<span class="collapser"> </span>
+							<span class="track">{{>artist_name}} – {{>title}}</span>
+							<span class="addTrack"> </span>
+					</h2>
+					<div class="info">
+						Album: Dreamcatcher <br />
+						Tags: Trance, Progressive <br />
+						Score: + 2 - 1
+					</div>
+				</li>
+	</script>
+
 	<script id="suggestionItem" type="text/x-jsrender">
         <li class="closed">
 					<h2>
@@ -141,7 +157,7 @@
 							<span class="addTrack"> </span>
 					</h2>
 					<div class="info">
-						Album: <span data-link="album"></span><br />
+						Album: <span data-link="title"></span><br />
 						Tags: Trance, Progressive <br />
 						Score: + 2 - 1
 					</div>

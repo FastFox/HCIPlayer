@@ -28,11 +28,17 @@ io.on 'connection', (socket) ->
 	#console.log socket
 	
 
-	socket.emit 'setTitle', 'Now playing'
+	#socket.emit 'setTitle', 'Now playing'
 
 	socket.on 'addTrack', (data) ->
 		socket.broadcast.emit 'newTrack', data
+	
+	socket.on 'trackInfo', (id, fn) ->
+		console.log id	
+		spotify.lookup { type: 'track', id: id.replace('spotify-WW:track:', '') }, (err, res) ->
+			fn( { album: res.track.album.name } )
 
+	###
 	socket.on 'reqSug', (fn) ->
 		#socket.emit 'sugTrack', { 'hoi' }
 		nest.song.search { 
@@ -49,7 +55,7 @@ io.on 'connection', (socket) ->
 					//response.songs.splice(i, 1);
 					//i--;
 				} else {
-					/*
+					 / *
 					spotify.lookup( { type: 'track', id: response.songs[i].tracks[0].foreign_id.replace('spotify-WW:track:', '') }, function(err, res) {
 
 						//console.log(res);
@@ -62,19 +68,21 @@ io.on 'connection', (socket) ->
 
 
 					} );
-					*/
+					* /
 					
 					//console.log(response.songs[i]);
 					//console.log(i, response.songs.length
 					//socket.emit('sugTrack', { artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id, last: i == response.songs.length - 1 });
-					suggestionData.push({ artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id });
+					suggestionData.push({ artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id, album: '' });
 						
 					//console.log('hoi');
 				}
 			}`
+
 			fn suggestionData
 			return true
-
+	###
+	
 ###
 spotify.get  '/lookup/1/.json?uri=spotify:artist:4YrKBkKSVeqDamzBPWVnSJ', (err, res) ->
 	console.log res
@@ -91,66 +99,49 @@ spotify.get  '/lookup/1/.json?uri=spotify:artist:4YrKBkKSVeqDamzBPWVnSJ', (err, 
 
 app.post '/search', (req, res) ->
 	#console.log req.body
+	tracks = []
+
+	spotify.search { type: 'track', query: req.body.query }, (err, result) ->
+		for track in result.tracks
+			tracks.push {
+				title: track.name,
+				artist: implodeArtists(track.artists),
+				album: track.album.name
+			}
+
+		console.log tracks
+		res.json tracks
+
+	###
 	nest.song.search { 
 		combined: req.body.query,
-		results: '15',
+		results: '5',
 		sort: 'song_hotttnesss-desc',
 		bucket: ['id:spotify-WW', 'tracks']
 	}, (error, response) ->
 		console.log error
 		#console.log response
-		#console.log response.songs, 'hoi'
+
+		tracks = []
 		
-		## Verwijder alle tracks met 0 spotify tracks
 		`for( i = 0; i < response.songs.length; i++ ) {
 			if( response.songs[i].tracks.length === 0 ) {
-				response.songs.splice(i, 1);
-				i--;
+				//response.songs.splice(i, 1);
+				//i--;
+			} else {
+				tracks.push( { 
+					artist: response.songs[i].artist_name,
+					title: response.songs[i].title,
+					spotify: response.songs[i].tracks[0].foreign_id,
+					album: ''
+				} );
 			}
+
 		}`
-		##		#for i = 0; i < response.songs.length; i++
-	
-			#console.log i
 
-		console.log response.songs
-
-		#for sIndex, sData of response.songs
-		#	if sData.tracks.length is 0
-		#		console.log sData.tracks.length, sIndex
-		#		response.songs.splice sIndex, 1
-		#	else
-		#		console.log sData.tracks.length, 'length'
-			#console.log sData
-			#for tIndex, tData of sData.tracks
-				#console.log tData
-				#console.log tData.foreign_id.replace('spotify-WW:track:', '')
-				#spotify.lookup { type: 'track', id: tData.foreign_id.replace('spotify-WW:track:', '') }, (err, res) ->
-				#if track.
-				#	console.log res
-		#console.log response.songs
-
-		res.json response.songs
-	#res.json { bla: 'hoi' }
-
-
-
-###
-app.post '/search', (req, res) ->
-	console.log req.body.query, req.body.type
-	spotify.search { type: 'track',	query: req.body.query }, (err, data) ->
-		if err
-			console.log 'Error', err
-		else
-			#console.log err, data
-			res.json data.tracks.slice(0, 10);
-
-	#res.json hoi
-###
-#
-#app.listen 3000
-
-
-
+		console.log tracks
+		res.json tracks
+	###
 
 app.post '/suggestions', (req, res) ->
 	#console.log req.body
