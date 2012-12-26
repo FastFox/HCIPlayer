@@ -88,6 +88,27 @@ $(document).ready () ->
 				$.mobile.loading 'hide'
 
 
+	# playlist sort popup
+  
+	$('#settings a').bind 'click', (e) ->
+		$('#settings [data-theme="e"]').buttonMarkup { theme: 'c' }
+		$(this).parent().parent().parent().buttonMarkup { theme: 'e' }
+		$('#settings').popup 'close'
+		false
+
+	###
+ $('#settings .chron').bind 'click', (e) ->
+	 $('#settings').popup 'close'
+	 false
+ $('#settings .alpha').bind 'click', (e) ->
+	 $('#settings').popup 'close'
+	 false
+ $('#settings .algoa').bind 'click', (e) ->
+	 $('#settings').popup 'close'
+	 false
+	###
+
+
 
 	# Door tabs swipen
 	$('#playlist').bind 'swipeleft', (e) ->
