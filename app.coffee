@@ -33,14 +33,15 @@ io.on 'connection', (socket) ->
 	socket.on 'addTrack', (data) ->
 		socket.broadcast.emit 'newTrack', data
 
-	socket.on 'reqSug', () ->
+	socket.on 'reqSug', (fn) ->
 		#socket.emit 'sugTrack', { 'hoi' }
 		nest.song.search { 
-			results: '25',
+			results: '5',
 			sort: 'song_hotttnesss-desc',
 			bucket: ['id:spotify-WW', 'tracks']
 		}, (error, response) ->
 			
+			suggestionData = []
 					#spotify.lookup { type: 'track', id: response.songs[0].id }, (err, res) ->
 						#console.log res
 			`for( i = 0; i < response.songs.length; i++ ) {
@@ -65,11 +66,13 @@ io.on 'connection', (socket) ->
 					
 					//console.log(response.songs[i]);
 					//console.log(i, response.songs.length
-					socket.emit('sugTrack', { artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id, last: i == response.songs.length - 1 });
+					//socket.emit('sugTrack', { artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id, last: i == response.songs.length - 1 });
+					suggestionData.push({ artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id });
 						
 					//console.log('hoi');
 				}
 			}`
+			fn suggestionData
 			return true
 
 ###
@@ -174,8 +177,6 @@ app.post '/suggestions', (req, res) ->
 			if( response.songs[i].tracks.length === 0 ) {
 				response.songs.splice(i, 1);
 				i--;
-			} else {
-				lookups++;
 			}
 		}`
 		###

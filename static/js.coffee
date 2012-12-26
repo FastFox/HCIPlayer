@@ -7,16 +7,20 @@ searchData = []
 socket = io.connect settings.url
 
 addTrackToPlaylist = (e) ->
-		$(e).toggleClass 'addTrack trackAdded'
-		data = $.view($(e).parent().parent()).data
-		$.observable(playlistData).insert playlistData.length, data
-		newTrack = $('#playlistItems li:last').addClass 'new'
-		setTimeout ( ->
-			newTrack.removeClass 'new'
-		), 3000
+	#$(e).toggleClass 'addTrack trackAdded'
+	data = $.view($(e).parent().parent()).data
+	$.observable(playlistData).insert playlistData.length, data
+	newTrack = $('#playlistItems li:last').addClass 'new'
+	setTimeout ( ->
+		newTrack.removeClass 'new'
+	), 3000
+
+	if playlistData.length == 1
+		$('.title').text data.artist + ' — ' + data.title
+
 	
-		console.log 'hoi', socket
-		socket.emit 'addTrack', data	
+	#console.log 'hoi', socket
+	socket.emit 'addTrack', data	
 
 addTrackToPlaylistFromServer = (data) ->
 		$.observable(playlistData).insert playlistData.length, data
@@ -24,6 +28,9 @@ addTrackToPlaylistFromServer = (data) ->
 		setTimeout ( ->
 			newTrack.removeClass 'new'
 		), 3000
+	
+	if playlistData.length == 1
+		$('.title').text data.artist + ' — ' + data.title
 
 socket.on 'setTitle', (title) ->
 	$('.title').text title
@@ -38,14 +45,33 @@ $(document).ready () ->
 		$('.title').text 'HCIPlayer'
 	else
 		$('.title').text playlistData
+	
+	
+	# preload suggestions
+	socket.emit 'reqSug', (data) ->
+		$.observable(suggestionData).refresh data
 
 	# events
 
+
+	# Track openklappen voor meer informatie
 	$('ul.list li').live 'click', (e) ->
+		$.mobile.loading 'show'
+		# als meer info nodig
+		if 'album' in suggestionData[ $(this).index() ] == false
+			#console.log $.mobile.activePage.attr 'id'
+			if $.mobile.activePage.attr('id') == 'getSuggestions'
+				$.observable(suggestionData[ $(this).index() ]).setProperty { album: 'bla', tags: 'blabla' }
+			else if $.mobile.activePage.attr('id') == 'addTrack'
+				$.observable(searchData[ $(this).index() ]).setProperty { album: 'bla', tags: 'blabla' }
+			else #playlist
+				$.observable(playlistData[ $(this).index() ]).setProperty { album: 'bla', tags: 'blabla' }
+
 		$(this).toggleClass('open closed').parent().children('.open').not(this).toggleClass 'open closed'
+		$.mobile.loading 'hide'
 
 	socket.on 'newTrack', (data) ->
-		addTrackToPlaylistFromServer data
+		#addTrackToPlaylistFromServer data
 		console.log data
 
 	#socket.on 'getInfo', (data) ->
@@ -115,42 +141,24 @@ $('#addTrack').live 'pagebeforecreate', () ->
 	$.templates { searchItem: '#searchItem' }
 	$.link.searchItem '#searchItems', searchData
 	
+
+
 $('#getSuggestions').live 'pageshow', () ->
-	#$.mobile.loading 'show'
 
-$('#getSuggestions').live 'pagebeforecreate', () ->
-	#console.log 'hoi!'
-	socket.emit 'reqSug'
-	#$.mobile.loading 'hide'
 
-	
-	###
-	$.ajax {
-			type: 'POST',
-			url: settings.url + '/suggestions',
-			data: { }
-			dataType: 'json', 
-			success: (data) ->
-				#console.log 'hoi'
-				#console.log data
-				#$.observable(searchData).data = data
-				$.observable(suggestionData).refresh data
-				#console.log $.observable(searchData)
-	}	
-	###
+#$('#getSuggestions').live 'pagebeforecreate', () ->
+	#$('#getSuggestions').live 'pagebeforeshow', () ->
 
+$('#getSuggestions').live 'pageinit', () ->
 	$('#suggestionItems .addTrack').live 'click', (e) ->
+		#console.log 'doei', $(this)
+		if $(this).hasClass 'addTrack'
+			$(this).removeClass('addTrack').addClass 'trackAdded'
+
 		addTrackToPlaylist(this)
-		###
-		$(this).toggleClass 'addTrack trackAdded'
-		$.observable(playlistData).insert playlistData.length, $.view($(this).parent().parent()).data
-		newTrack = $('#playlistItems li:last').addClass 'new'
-		setTimeout ( ->
-			newTrack.removeClass 'new'
-		), 3000
-		###
 		false
 	
 	$.templates { suggestionItem: '#suggestionItem' }
 	$.link.suggestionItem '#suggestionItems', suggestionData
+	$('#suggestionItems').link true, suggestionData
 

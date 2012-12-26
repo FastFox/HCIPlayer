@@ -45,12 +45,14 @@ io.on('connection', function(socket) {
   socket.on('addTrack', function(data) {
     return socket.broadcast.emit('newTrack', data);
   });
-  return socket.on('reqSug', function() {
+  return socket.on('reqSug', function(fn) {
     return nest.song.search({
-      results: '25',
+      results: '5',
       sort: 'song_hotttnesss-desc',
       bucket: ['id:spotify-WW', 'tracks']
     }, function(error, response) {
+      var suggestionData;
+      suggestionData = [];
       for( i = 0; i < response.songs.length; i++ ) {
 				if( response.songs[i].tracks.length === 0 ) {
 					//response.songs.splice(i, 1);
@@ -73,11 +75,14 @@ io.on('connection', function(socket) {
 					
 					//console.log(response.songs[i]);
 					//console.log(i, response.songs.length
-					socket.emit('sugTrack', { artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id, last: i == response.songs.length - 1 });
+					//socket.emit('sugTrack', { artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id, last: i == response.songs.length - 1 });
+					suggestionData.push({ artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id });
 						
 					//console.log('hoi');
 				}
 			};
+
+      fn(suggestionData);
       return true;
     });
   });
@@ -135,8 +140,6 @@ app.post('/suggestions', function(req, res) {
 			if( response.songs[i].tracks.length === 0 ) {
 				response.songs.splice(i, 1);
 				i--;
-			} else {
-				lookups++;
 			}
 		};
 

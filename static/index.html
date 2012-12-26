@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html> 
   <head> 
-	  <title>Artist - Track (Now playing track)</title> 
+	  <title>HCIPlayer</title> 
     	<meta name="viewport" content="width=device-width, initial-scale=1"> 
       <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
       <meta content="utf-8" http-equiv="encoding">
@@ -31,7 +31,7 @@
 	</div>
 
 	<div data-id="header" data-role="header" data-position="fixed">
-		<h1 class="title">Artist - Track (Now playing track)</h1>
+		<h1 class="title">HCIPlayer</h1>
 		<a href="#settings" data-rel="popup" data-position-to="window" data-transition="pop" data-icon="gear" data-iconpos="notext" class="ui-btn-right"></a>
 
     <div data-role="navbar">
@@ -47,12 +47,12 @@
 			<li class="closed">
 				<h2>
 						<span class="collapser"> </span>
-						<span class="track">{{>artist_name}} – {{>title}}</span>
+						<span class="track">{{>artist}} – {{>title}}</span>
 						<span class="thumbup"> </span>
 						<span class="thumbdown"> </span>
 				</h2>
 				<div class="info">
-					Album: Dreamcatcher <br />
+					Album: {{>album}}<br />
 					Tags: Trance, Progressive <br />
 					Score: + 2 - 1
 				</div>
@@ -72,7 +72,7 @@
 <div data-role="page" id="addTrack">
 
 	<div data-id="header" data-role="header" data-position="fixed">
-		<h1 class="title">Artist - Track (Now playing track)</h1>
+		<h1 class="title">HCIPlayer</h1>
 
     <div data-role="navbar">
 		  <ul>
@@ -123,7 +123,7 @@
 <div data-role="page" id="getSuggestions">
 
 	<div data-id="header" data-role="header" data-position="fixed">
-		<h1 class="title">Artist - Track (Now playing track)</h1>
+		<h1 class="title">HCIPlayer</h1>
 
     <div data-role="navbar">
 		  <ul>
@@ -153,11 +153,11 @@
         <li class="closed">
 					<h2>
 							<span class="collapser"> </span>
-							<span class="track">{{>artist}} – {{>title}}</span>
+							<span class="track"><span data-link="artist"></span> – <span data-link="title"></span></span>
 							<span class="addTrack"> </span>
 					</h2>
 					<div class="info">
-						Album: {{>album}} <br />
+						Album: <span data-link="album"></span><br />
 						Tags: Trance, Progressive <br />
 						Score: + 2 - 1
 					</div>
