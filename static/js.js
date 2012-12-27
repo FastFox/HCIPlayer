@@ -100,19 +100,30 @@ $(document).ready(function() {
     return false;
   });
   $('#playlist').bind('swipeleft', function(e) {
-    return $.mobile.changePage($('#addTrack'), 'none');
+    return $.mobile.changePage($('#addTrack'), {
+      transition: 'slide'
+    });
   });
   $('#addTrack').bind('swipeleft', function(e) {
-    return $.mobile.changePage($('#getSuggestions'), 'none');
+    return $.mobile.changePage($('#getSuggestions'), {
+      transition: 'slide'
+    });
   });
   $('#addTrack').bind('swiperight', function(e) {
-    return $.mobile.changePage($('#playlist'), 'none');
+    return $.mobile.changePage($('#playlist'), {
+      transition: 'reverse slide'
+    });
   });
   $('#getSuggestions').bind('swiperight', function(e) {
-    return $.mobile.changePage($('#addTrack'), 'none');
+    return $.mobile.changePage($('#addTrack'), {
+      transition: 'reverse slide'
+    });
   });
   socket.on('newTrack', function(data) {
-    return addTrackToPlaylistFromServer(data);
+    addTrackToPlaylis;
+    if (playlistData.length === 1) {
+      return $('.title').text(data.artist + ' — ' + data.titletFromServer(data));
+    }
   });
   socket.on('sugTrack', function(data) {
     return $.observable(suggestionData).insert(suggestionData.length, data);

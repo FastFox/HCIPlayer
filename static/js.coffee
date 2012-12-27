@@ -98,19 +98,21 @@ $(document).ready () ->
 
 	# Door tabs swipen
 	$('#playlist').bind 'swipeleft', (e) ->
-		$.mobile.changePage $('#addTrack'), 'none'
+		$.mobile.changePage $('#addTrack'), { transition: 'slide' }
 
 	$('#addTrack').bind 'swipeleft', (e) ->
-		$.mobile.changePage $('#getSuggestions'), 'none'
+		$.mobile.changePage $('#getSuggestions'), { transition: 'slide' }
 
 	$('#addTrack').bind 'swiperight', (e) ->
-		$.mobile.changePage $('#playlist'), 'none'
+		$.mobile.changePage $('#playlist'), { transition: 'reverse slide' }
 
 	$('#getSuggestions').bind 'swiperight', (e) ->
-		$.mobile.changePage $('#addTrack'), 'none'
+		$.mobile.changePage $('#addTrack'), { transition: 'reverse slide' }
 
 	socket.on 'newTrack', (data) ->
-		addTrackToPlaylistFromServer data
+		addTrackToPlaylis
+		if playlistData.length == 1
+			$('.title').text data.artist + ' — ' + data.titletFromServer data
 		#console.log data
 
 	#socket.on 'getInfo', (data) ->
