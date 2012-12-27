@@ -41,6 +41,9 @@ implodeArtists = function(artists) {
 };
 
 io.on('connection', function(socket) {
+  socket.on('nextTrack', function() {
+    return socket.broadcast.emit('nextTrack');
+  });
   socket.on('addTrack', function(data) {
     return socket.broadcast.emit('newTrack', data);
   });

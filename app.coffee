@@ -30,6 +30,9 @@ io.on 'connection', (socket) ->
 
 	#socket.emit 'setTitle', 'Now playing'
 
+	socket.on 'nextTrack', () ->
+		socket.broadcast.emit 'nextTrack'
+
 	socket.on 'addTrack', (data) ->
 		socket.broadcast.emit 'newTrack', data
 	

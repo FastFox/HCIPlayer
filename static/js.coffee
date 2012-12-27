@@ -105,6 +105,23 @@ $(document).ready () ->
 		false
 
 	# Door tabs swipen
+			console.log $.mobile.activePage.attr('id') 	
+
+	$('body').bind 'swipeleft', (e) ->
+			if $.mobile.activePage.attr('id') == 'playlist'
+				$.mobile.changePage $('#addTrack'), { transition: 'slide' }
+
+			else if $.mobile.activePage.attr('id') == 'addTrack'
+				$.mobile.changePage $('#getSuggestions'), { transition: 'slide' }
+	
+	$('body').bind 'swiperight', (e) ->
+			if $.mobile.activePage.attr('id') == 'addTrack'
+				$.mobile.changePage $('#playlist'), { transition: 'reverse slide' }
+			else if $.mobile.activePage.attr('id') == 'getSuggestions'
+				$.mobile.changePage $('#addTrack'), { transition: 'reverse slide' }
+			 	
+	
+	###
 	$('#playlist').bind 'swipeleft', (e) ->
 		$.mobile.changePage $('#addTrack'), { transition: 'slide' }
 
@@ -116,6 +133,7 @@ $(document).ready () ->
 
 	$('#getSuggestions').bind 'swiperight', (e) ->
 		$.mobile.changePage $('#addTrack'), { transition: 'reverse slide' }
+	###
 
 	socket.on 'newTrack', (data) ->
 		addTrackToPlaylis
