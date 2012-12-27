@@ -110,8 +110,8 @@ $(document).ready () ->
 		$.mobile.changePage $('#addTrack'), 'none'
 
 	socket.on 'newTrack', (data) ->
-		#addTrackToPlaylistFromServer data
-		console.log data
+		addTrackToPlaylistFromServer data
+		#console.log data
 
 	#socket.on 'getInfo', (data) ->
 		#console.log data

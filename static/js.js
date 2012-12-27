@@ -112,7 +112,7 @@ $(document).ready(function() {
     return $.mobile.changePage($('#addTrack'), 'none');
   });
   socket.on('newTrack', function(data) {
-    return console.log(data);
+    return addTrackToPlaylistFromServer(data);
   });
   socket.on('sugTrack', function(data) {
     return $.observable(suggestionData).insert(suggestionData.length, data);
