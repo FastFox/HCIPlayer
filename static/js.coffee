@@ -17,7 +17,6 @@ addTrackToPlaylist = (e) ->
 
 	if playlistData.length == 1
 		$('.title').text data.artist + ' — ' + data.title
-
 	
 	#console.log 'hoi', socket
 	socket.emit 'addTrack', data	
@@ -52,11 +51,11 @@ $(document).ready () ->
 		$.observable(suggestionData).refresh data
 
 	# preload images
-	$('<img />')[0].src = 'images/icons-18-white.png';
-	$('<img />')[0].src = 'images/thumbs_up.png';
-	$('<img />')[0].src = 'images/thumbs_up_clicked.png';
-	$('<img />')[0].src = 'images/thumbs_down.png';
-	$('<img />')[0].src = 'images/thumbs_down_clicked.png';
+	$('<img />')[0].src = '/images/icons-18-white.png';
+	$('<img />')[0].src = '/images/thumbs_up.png';
+	$('<img />')[0].src = '/images/thumbs_up_clicked.png';
+	$('<img />')[0].src = '/images/thumbs_down.png';
+	$('<img />')[0].src = '/images/thumbs_down_clicked.png';
 
 
 	# events
@@ -105,7 +104,7 @@ $(document).ready () ->
 		false
 
 	# Door tabs swipen
-			console.log $.mobile.activePage.attr('id') 	
+	#console.log $.mobile.activePage.attr('id') 	
 
 	$('body').bind 'swipeleft', (e) ->
 			if $.mobile.activePage.attr('id') == 'playlist'
@@ -134,11 +133,15 @@ $(document).ready () ->
 	$('#getSuggestions').bind 'swiperight', (e) ->
 		$.mobile.changePage $('#addTrack'), { transition: 'reverse slide' }
 	###
+	
+	socket.on 'nextTrack', () ->
+		console.log 'nextTrack'
+		$.observable(playlistData).remove 0, 1
 
 	socket.on 'newTrack', (data) ->
-		addTrackToPlaylis
+		addTrackToPlaylistFromServer data
 		if playlistData.length == 1
-			$('.title').text data.artist + ' — ' + data.titletFromServer data
+			$('.title').text data.artist + ' — ' + data.title
 		#console.log data
 
 	#socket.on 'getInfo', (data) ->

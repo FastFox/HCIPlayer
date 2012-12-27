@@ -49,11 +49,11 @@ $(document).ready(function() {
   socket.emit('reqSug', function(data) {
     return $.observable(suggestionData).refresh(data);
   });
-  $('<img />')[0].src = 'images/icons-18-white.png';
-  $('<img />')[0].src = 'images/thumbs_up.png';
-  $('<img />')[0].src = 'images/thumbs_up_clicked.png';
-  $('<img />')[0].src = 'images/thumbs_down.png';
-  $('<img />')[0].src = 'images/thumbs_down_clicked.png';
+  $('<img />')[0].src = '/images/icons-18-white.png';
+  $('<img />')[0].src = '/images/thumbs_up.png';
+  $('<img />')[0].src = '/images/thumbs_up_clicked.png';
+  $('<img />')[0].src = '/images/thumbs_down.png';
+  $('<img />')[0].src = '/images/thumbs_down_clicked.png';
   $('ul.list li').live('click', function(e) {
     var that;
     if ($(this).hasClass('open')) {
@@ -104,30 +104,50 @@ $(document).ready(function() {
     $('#settings').popup('close');
     return false;
   });
-  $('#playlist').bind('swipeleft', function(e) {
-    return $.mobile.changePage($('#addTrack'), {
-      transition: 'slide'
-    });
+  $('body').bind('swipeleft', function(e) {
+    if ($.mobile.activePage.attr('id') === 'playlist') {
+      return $.mobile.changePage($('#addTrack'), {
+        transition: 'slide'
+      });
+    } else if ($.mobile.activePage.attr('id') === 'addTrack') {
+      return $.mobile.changePage($('#getSuggestions'), {
+        transition: 'slide'
+      });
+    }
   });
-  $('#addTrack').bind('swipeleft', function(e) {
-    return $.mobile.changePage($('#getSuggestions'), {
-      transition: 'slide'
-    });
+  $('body').bind('swiperight', function(e) {
+    if ($.mobile.activePage.attr('id') === 'addTrack') {
+      return $.mobile.changePage($('#playlist'), {
+        transition: 'reverse slide'
+      });
+    } else if ($.mobile.activePage.attr('id') === 'getSuggestions') {
+      return $.mobile.changePage($('#addTrack'), {
+        transition: 'reverse slide'
+      });
+    }
   });
-  $('#addTrack').bind('swiperight', function(e) {
-    return $.mobile.changePage($('#playlist'), {
-      transition: 'reverse slide'
-    });
-  });
-  $('#getSuggestions').bind('swiperight', function(e) {
-    return $.mobile.changePage($('#addTrack'), {
-      transition: 'reverse slide'
-    });
+  /*
+  	$('#playlist').bind 'swipeleft', (e) ->
+  		$.mobile.changePage $('#addTrack'), { transition: 'slide' }
+  
+  	$('#addTrack').bind 'swipeleft', (e) ->
+  		$.mobile.changePage $('#getSuggestions'), { transition: 'slide' }
+  
+  	$('#addTrack').bind 'swiperight', (e) ->
+  		$.mobile.changePage $('#playlist'), { transition: 'reverse slide' }
+  
+  	$('#getSuggestions').bind 'swiperight', (e) ->
+  		$.mobile.changePage $('#addTrack'), { transition: 'reverse slide' }
+  */
+
+  socket.on('nextTrack', function() {
+    console.log('nextTrack');
+    return $.observable(playlistData).remove(0, 1);
   });
   socket.on('newTrack', function(data) {
-    addTrackToPlaylis;
+    addTrackToPlaylistFromServer(data);
     if (playlistData.length === 1) {
-      return $('.title').text(data.artist + ' — ' + data.titletFromServer(data));
+      return $('.title').text(data.artist + ' — ' + data.title);
     }
   });
   socket.on('sugTrack', function(data) {
