@@ -51,6 +51,14 @@ $(document).ready () ->
 	socket.emit 'reqSug', (data) ->
 		$.observable(suggestionData).refresh data
 
+	# preload images
+	$('<img />')[0].src = 'images/icons-18-white.png';
+	$('<img />')[0].src = 'images/thumbs_up.png';
+	$('<img />')[0].src = 'images/thumbs_up_clicked.png';
+	$('<img />')[0].src = 'images/thumbs_down.png';
+	$('<img />')[0].src = 'images/thumbs_down_clicked.png';
+
+
 	# events
 
 
