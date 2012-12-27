@@ -99,18 +99,6 @@ $(document).ready(function() {
     $('#settings').popup('close');
     return false;
   });
-  /*
-   $('#settings .chron').bind 'click', (e) ->
-  	 $('#settings').popup 'close'
-  	 false
-   $('#settings .alpha').bind 'click', (e) ->
-  	 $('#settings').popup 'close'
-  	 false
-   $('#settings .algoa').bind 'click', (e) ->
-  	 $('#settings').popup 'close'
-  	 false
-  */
-
   $('#playlist').bind('swipeleft', function(e) {
     return $.mobile.changePage($('#addTrack'), 'none');
   });

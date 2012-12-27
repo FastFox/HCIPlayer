@@ -96,20 +96,6 @@ $(document).ready () ->
 		$('#settings').popup 'close'
 		false
 
-	###
- $('#settings .chron').bind 'click', (e) ->
-	 $('#settings').popup 'close'
-	 false
- $('#settings .alpha').bind 'click', (e) ->
-	 $('#settings').popup 'close'
-	 false
- $('#settings .algoa').bind 'click', (e) ->
-	 $('#settings').popup 'close'
-	 false
-	###
-
-
-
 	# Door tabs swipen
 	$('#playlist').bind 'swipeleft', (e) ->
 		$.mobile.changePage $('#addTrack'), 'none'

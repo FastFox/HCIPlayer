@@ -38,15 +38,13 @@ io.on 'connection', (socket) ->
 		spotify.lookup { type: 'track', id: id.replace('spotify-WW:track:', '') }, (err, res) ->
 			fn( { album: res.track.album.name } )
 
-	###
 	socket.on 'reqSug', (fn) ->
 		#socket.emit 'sugTrack', { 'hoi' }
 		nest.song.search { 
-			results: '5',
+			results: '25',
 			sort: 'song_hotttnesss-desc',
 			bucket: ['id:spotify-WW', 'tracks']
 		}, (error, response) ->
-			
 			suggestionData = []
 					#spotify.lookup { type: 'track', id: response.songs[0].id }, (err, res) ->
 						#console.log res
@@ -55,7 +53,7 @@ io.on 'connection', (socket) ->
 					//response.songs.splice(i, 1);
 					//i--;
 				} else {
-					 / *
+					 /*
 					spotify.lookup( { type: 'track', id: response.songs[i].tracks[0].foreign_id.replace('spotify-WW:track:', '') }, function(err, res) {
 
 						//console.log(res);
@@ -67,12 +65,13 @@ io.on 'connection', (socket) ->
 						//console.log(res);
 
 
-					} );
-					* /
+					} ); 
+					*/
 					
 					//console.log(response.songs[i]);
 					//console.log(i, response.songs.length
 					//socket.emit('sugTrack', { artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id, last: i == response.songs.length - 1 });
+					console.log(response.songs[i]);
 					suggestionData.push({ artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id, album: '' });
 						
 					//console.log('hoi');
@@ -81,7 +80,6 @@ io.on 'connection', (socket) ->
 
 			fn suggestionData
 			return true
-	###
 	
 ###
 spotify.get  '/lookup/1/.json?uri=spotify:artist:4YrKBkKSVeqDamzBPWVnSJ', (err, res) ->
@@ -170,20 +168,5 @@ app.post '/suggestions', (req, res) ->
 				i--;
 			}
 		}`
-		###
-
-		for info in response.songs
-			#console.log info
-			#console.log info.foreign_release_id.replace 'spotify-WW:release:', ''
-			id = info.tracks[0].foreign_id.replace 'spotify-WW:track:', ''
-			#console.log id
-			spotify.lookup { type: 'track', id: '' + id + '' }, (err, spot) ->
-				spotList.push spot
-				lookups--;
-				console.log lookups
-				#console.log spot
-	
-		#console.log spotList
-		###
 
 		res.json response.songs

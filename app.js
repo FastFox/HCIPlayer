@@ -44,7 +44,7 @@ io.on('connection', function(socket) {
   socket.on('addTrack', function(data) {
     return socket.broadcast.emit('newTrack', data);
   });
-  return socket.on('trackInfo', function(id, fn) {
+  socket.on('trackInfo', function(id, fn) {
     console.log(id);
     return spotify.lookup({
       type: 'track',
@@ -55,51 +55,48 @@ io.on('connection', function(socket) {
       });
     });
   });
-  /*
-  	socket.on 'reqSug', (fn) ->
-  		#socket.emit 'sugTrack', { 'hoi' }
-  		nest.song.search { 
-  			results: '5',
-  			sort: 'song_hotttnesss-desc',
-  			bucket: ['id:spotify-WW', 'tracks']
-  		}, (error, response) ->
-  			
-  			suggestionData = []
-  					#spotify.lookup { type: 'track', id: response.songs[0].id }, (err, res) ->
-  						#console.log res
-  			`for( i = 0; i < response.songs.length; i++ ) {
-  				if( response.songs[i].tracks.length === 0 ) {
-  					//response.songs.splice(i, 1);
-  					//i--;
-  				} else {
-  					 / *
-  					spotify.lookup( { type: 'track', id: response.songs[i].tracks[0].foreign_id.replace('spotify-WW:track:', '') }, function(err, res) {
-  
-  						//console.log(res);
-  						//console.log(res.track);
-  						console.log(response.songs[i]);
-  						
-  						socket.emit('sugTrack', { artist: implodeArtists(res.track.artists), title: res.track.name, album: res.track.name } );
-  						//socket.emit('sugTrack', res);
-  						//console.log(res);
-  
-  
-  					} );
-  					* /
-  					
-  					//console.log(response.songs[i]);
-  					//console.log(i, response.songs.length
-  					//socket.emit('sugTrack', { artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id, last: i == response.songs.length - 1 });
-  					suggestionData.push({ artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id, album: '' });
-  						
-  					//console.log('hoi');
-  				}
-  			}`
-  
-  			fn suggestionData
-  			return true
-  */
+  return socket.on('reqSug', function(fn) {
+    return nest.song.search({
+      results: '25',
+      sort: 'song_hotttnesss-desc',
+      bucket: ['id:spotify-WW', 'tracks']
+    }, function(error, response) {
+      var suggestionData;
+      suggestionData = [];
+      for( i = 0; i < response.songs.length; i++ ) {
+				if( response.songs[i].tracks.length === 0 ) {
+					//response.songs.splice(i, 1);
+					//i--;
+				} else {
+					 /*
+					spotify.lookup( { type: 'track', id: response.songs[i].tracks[0].foreign_id.replace('spotify-WW:track:', '') }, function(err, res) {
 
+						//console.log(res);
+						//console.log(res.track);
+						console.log(response.songs[i]);
+						
+						socket.emit('sugTrack', { artist: implodeArtists(res.track.artists), title: res.track.name, album: res.track.name } );
+						//socket.emit('sugTrack', res);
+						//console.log(res);
+
+
+					} ); 
+					*/
+					
+					//console.log(response.songs[i]);
+					//console.log(i, response.songs.length
+					//socket.emit('sugTrack', { artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id, last: i == response.songs.length - 1 });
+					console.log(response.songs[i]);
+					suggestionData.push({ artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id, album: '' });
+						
+					//console.log('hoi');
+				}
+			};
+
+      fn(suggestionData);
+      return true;
+    });
+  });
 });
 
 /*
@@ -175,22 +172,6 @@ app.post('/suggestions', function(req, res) {
 				i--;
 			}
 		};
-
-    /*
-    
-    		for info in response.songs
-    			#console.log info
-    			#console.log info.foreign_release_id.replace 'spotify-WW:release:', ''
-    			id = info.tracks[0].foreign_id.replace 'spotify-WW:track:', ''
-    			#console.log id
-    			spotify.lookup { type: 'track', id: '' + id + '' }, (err, spot) ->
-    				spotList.push spot
-    				lookups--;
-    				console.log lookups
-    				#console.log spot
-    	
-    		#console.log spotList
-    */
     return res.json(response.songs);
   });
 });
