@@ -53,8 +53,10 @@
 		list-style-type: none;	
 		h2 {
 			margin: 0;
-			height: 30px;
-			line-height: 30px;
+			//height: 30px;
+			//line-height: 30px;
+			height: 36px;
+			line-height: 36px;
 			font-size: 12px;
 			font-weight: bold;
 			color: #222222;
@@ -65,19 +67,24 @@
 			white-space: nowrap;
 			.icon() {
 				position: absolute;
-				margin: 6px;
-				width: 18px;
-				height: 18px;
+				//margin: 6px;
+				//margin: 9px;
+				margin: 7px 10px 0px 6px;
+				width: 22px;
+				height: 22px;
 				box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
 				background-color: #666;
-				background-image: url(images/icons-18-white.png);
+				//background-image: url(images/icons-18-white.png);
+				background-image: url(images/icons-36-white.png);
+				background-size: 766px 24px;
+				//background-position: left center;
 				background-repeat: no-repeat;
 			  /*
 				-moz-border-radius: 9px;
 				-webkit-border-radius: 9px;
 				border-radius: 9px;
 				*/
-				.corners(9px);
+				.corners(11px);
 			}
 
 			.collapser {
@@ -86,7 +93,7 @@
 
 			.track {
 				display: block;
-				padding: 0 66px 0 32px;
+				padding: 0 66px 0 34px;
 				white-space: nowrap;
 				overflow: hidden;
 				text-overflow: ellipsis;
@@ -124,22 +131,25 @@
 			.addTrack {
 				position: absolute;
 				.icon;
-				background-position: 0 50%;
-				margin-top: -24px;
-				right: 16px;
+				background-position: 2px 50%;
+				//margin-top: -24px;
+				margin-top: -29px;
+				right: 12px;
 			}
 			.trackAdded {
 				position: absolute;
 				.icon;
-				background-position: -252px 50%;
-				margin-top: -24px;
-				right: 16px;
+				background-position: -247px 50%;
+				//background-size: 766px 18px;
+				//margin-top: -24px;
+				margin-top: -29px;
+				right: 12px;
 				.shadow(#387bbe);
 			}
 		}
 		&.open {
 			h2 .collapser {
-				background-position: -216px 50%;
+				background-position: -211px 50%;
 			}
 			.info {
 				display: block;
@@ -147,7 +157,7 @@
 		}
 		&.closed {
 			h2 .collapser {
-				background-position: -108px 50%;
+				background-position: -104px 50%;
 			}
 			.info {
 				display: none;

@@ -43,6 +43,10 @@ io.on 'connection', (socket) ->
 
 	socket.on 'reqSug', (fn) ->
 		#socket.emit 'sugTrack', { 'hoi' }
+
+		console.log 'load from cache'
+		fn require './suggestions.json'
+		###
 		nest.song.search { 
 			results: '25',
 			sort: 'song_hotttnesss-desc',
@@ -56,34 +60,21 @@ io.on 'connection', (socket) ->
 					//response.songs.splice(i, 1);
 					//i--;
 				} else {
-					 /*
-					spotify.lookup( { type: 'track', id: response.songs[i].tracks[0].foreign_id.replace('spotify-WW:track:', '') }, function(err, res) {
-
-						//console.log(res);
-						//console.log(res.track);
-						console.log(response.songs[i]);
-						
-						socket.emit('sugTrack', { artist: implodeArtists(res.track.artists), title: res.track.name, album: res.track.name } );
-						//socket.emit('sugTrack', res);
-						//console.log(res);
-
-
-					} ); 
-					*/
 					
 					//console.log(response.songs[i]);
 					//console.log(i, response.songs.length
 					//socket.emit('sugTrack', { artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id, last: i == response.songs.length - 1 });
-					console.log(response.songs[i]);
+					//console.log(response.songs[i]);
 					suggestionData.push({ artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id, album: '' });
 						
 					//console.log('hoi');
 				}
 			}`
 
+			#console.log JSON.stringifi(suggestionData)
 			fn suggestionData
 			return true
-	
+	###
 ###
 spotify.get  '/lookup/1/.json?uri=spotify:artist:4YrKBkKSVeqDamzBPWVnSJ', (err, res) ->
 	console.log res
