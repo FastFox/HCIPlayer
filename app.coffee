@@ -47,7 +47,7 @@ io.on 'connection', (socket) ->
 	
 	socket.on 'trackInfo', (id, fn) ->
 		#console.log id	
-		spotify.lookup { type: 'track', id: id.replace('spotify-WW:track:', '') }, (err, res) ->
+		spotify.lookup { type: 'track', id: id.replace('spotify:track:', '') }, (err, res) ->
 			fn( { album: res.track.album.name } )
 			
 	socket.on 'search', (query, fn) ->

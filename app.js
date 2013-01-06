@@ -57,7 +57,7 @@ io.on('connection', function(socket) {
   socket.on('trackInfo', function(id, fn) {
     return spotify.lookup({
       type: 'track',
-      id: id.replace('spotify-WW:track:', '')
+      id: id.replace('spotify:track:', '')
     }, function(err, res) {
       return fn({
         album: res.track.album.name
