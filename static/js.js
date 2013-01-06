@@ -52,7 +52,8 @@ downVote = function(index, amount) {
 
 $(document).ready(function() {
   socket.emit('reqPlaylist', function(data) {
-    return $.observable(playlistData).refresh(data);
+    $.observable(playlistData).refresh(data);
+    return $('.title').text(playlistData[0].artist + ' — ' + playlistData[0].title);
   });
   /*
   	if playlistData.length == 0

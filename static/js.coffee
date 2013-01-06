@@ -45,6 +45,7 @@ $(document).ready () ->
 	socket.emit 'reqPlaylist', (data) ->	
 		#console.log data
 		$.observable(playlistData).refresh data
+		$('.title').text playlistData[0].artist + ' — ' + playlistData[0].title
 
 	# set title
 	
