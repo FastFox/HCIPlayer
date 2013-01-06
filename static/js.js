@@ -142,9 +142,7 @@ $(document).ready(function() {
   });
   socket.on('nextTrack', function() {
     $.observable(playlistData).remove(0, 1);
-    if (playlistData.length === 1) {
-      return $('.title').text(data.artist + ' — ' + data.title);
-    }
+    return $('.title').text(playlistData[0].artist + ' — ' + playlistData[0].title);
   });
   socket.on('newTrack', function(data) {
     addTrackToPlaylistFromServer(data);

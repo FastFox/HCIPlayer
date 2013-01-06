@@ -45,8 +45,7 @@ implodeArtists = function(artists) {
 io.on('connection', function(socket) {
   socket.on('nextTrack', function() {
     socket.broadcast.emit('nextTrack');
-    playlistData.shift();
-    return console.log(playlistData);
+    return playlistData.shift();
   });
   socket.on('addTrack', function(data) {
     socket.broadcast.emit('newTrack', data);

@@ -133,8 +133,7 @@ $(document).ready () ->
 
 	socket.on 'nextTrack', () ->
 		$.observable(playlistData).remove 0, 1
-		if playlistData.length == 1
-			$('.title').text data.artist + ' — ' + data.title
+		$('.title').text playlistData[0].artist + ' — ' + playlistData[0].title
 
 	socket.on 'newTrack', (data) ->
 		addTrackToPlaylistFromServer data

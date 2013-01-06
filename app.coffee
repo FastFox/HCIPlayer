@@ -35,7 +35,7 @@ io.on 'connection', (socket) ->
 	socket.on 'nextTrack', () ->
 		socket.broadcast.emit 'nextTrack'
 		playlistData.shift()
-		console.log playlistData
+		#console.log playlistData
 
 	socket.on 'addTrack', (data) ->
 		socket.broadcast.emit 'newTrack', data
