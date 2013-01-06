@@ -9,6 +9,9 @@ socket = io.connect settings.url
 addTrackToPlaylist = (e) ->
 	#$(e).toggleClass 'addTrack trackAdded'
 	data = $.view($(e).parent().parent()).data
+	data.up = 0;
+	data.down = 0;
+	#console.log data
 	$.observable(playlistData).insert playlistData.length, data
 	newTrack = $('#playlistItems li:last').addClass 'new'
 	setTimeout ( ->
@@ -31,19 +34,27 @@ addTrackToPlaylistFromServer = (data) ->
 	if playlistData.length == 1
 		$('.title').text data.artist + ' — ' + data.title
 
-socket.on 'setTitle', (title) ->
-	$('.title').text title
+upVote = (index, amount) ->
+	$.observable(playlistData[index]).setProperty { up: playlistData[index].up + amount }
+
+downVote = (index, amount) ->
+	$.observable(playlistData[index]).setProperty { down: playlistData[index].down + amount }
 
 $(document).ready () ->
 
 	# Load playlist
-	
+	socket.emit 'reqPlaylist', (data) ->	
+		#console.log data
+		$.observable(playlistData).refresh data
 
 	# set title
+	
+	###
 	if playlistData.length == 0
 		$('.title').text 'HCIPlayer'
 	else
 		$('.title').text playlistData
+	###
 	
 	
 	# preload suggestions
@@ -51,7 +62,7 @@ $(document).ready () ->
 		$.observable(suggestionData).refresh data
 
 	# preload images
-	$('<img />')[0].src = '/images/icons-18-white.png';
+	#console.log $('<img />')[0].src = '/images/icons-18-white.png';
 	$('<img />')[0].src = '/images/thumbs_up.png';
 	$('<img />')[0].src = '/images/thumbs_up_clicked.png';
 	$('<img />')[0].src = '/images/thumbs_down.png';
@@ -70,7 +81,7 @@ $(document).ready () ->
 			# als meer info nodig
 			#if 'album' in suggestionData[ $(this).index() ] == false
 			#console.log suggestionData[ $(this).index() ].album
-			console.log $.mobile.activePage.attr('id') 	
+			#console.log $.mobile.activePage.attr('id') 	
 
 			that = this
 			if $.mobile.activePage.attr('id') == 'getSuggestions' and suggestionData[ $(this).index() ].album == ''
@@ -79,9 +90,9 @@ $(document).ready () ->
 					$(that).toggleClass('open closed').parent().children('.open').not(that).toggleClass 'open closed'
 					$.mobile.loading 'hide'
 			else if $.mobile.activePage.attr('id') == 'addTrack' and searchData[ $(this).index() ].album == ''
-				console.log $.observable(searchData).data()[ $(this).index() ]
+				#console.log $.observable(searchData).data()[ $(this).index() ]
 				socket.emit 'trackInfo', $.observable(searchData).data()[ $(this).index() ].spotify, (data) ->
-					console.log data
+					#console.log data
 					$.observable(searchData[ $(that).index() ]).setProperty { album: data.album }
 					$(that).toggleClass('open closed').parent().children('.open').not(that).toggleClass 'open closed'
 					$.mobile.loading 'hide'
@@ -119,21 +130,9 @@ $(document).ready () ->
 			else if $.mobile.activePage.attr('id') == 'getSuggestions'
 				$.mobile.changePage $('#addTrack'), { transition: 'reverse slide' }
 			 	
-	
-	###
-	$('#playlist').bind 'swipeleft', (e) ->
-		$.mobile.changePage $('#addTrack'), { transition: 'slide' }
+	socket.on 'setTitle', (title) ->
+		$('.title').text title
 
-	$('#addTrack').bind 'swipeleft', (e) ->
-		$.mobile.changePage $('#getSuggestions'), { transition: 'slide' }
-
-	$('#addTrack').bind 'swiperight', (e) ->
-		$.mobile.changePage $('#playlist'), { transition: 'reverse slide' }
-
-	$('#getSuggestions').bind 'swiperight', (e) ->
-		$.mobile.changePage $('#addTrack'), { transition: 'reverse slide' }
-	###
-	
 	socket.on 'nextTrack', () ->
 		$.observable(playlistData).remove 0, 1
 		if playlistData.length == 1
@@ -143,35 +142,58 @@ $(document).ready () ->
 		addTrackToPlaylistFromServer data
 		if playlistData.length == 1
 			$('.title').text data.artist + ' — ' + data.title
-		#console.log data
 
-	#socket.on 'getInfo', (data) ->
-		#console.log data
-		#
 	
 	socket.on 'sugTrack', (data) ->
 		#console.log data
 		#$.observable(suggestionData).refresh {}
 		$.observable(suggestionData).insert suggestionData.length, data
 
-	return true
+	socket.on 'upVote', (data) ->
+		upVote data.index, data.amount
 	
+	socket.on 'downVote', (data) ->
+		downVote data.index, data.amount
+
+	return true
+		
+
+
 
 $('#playlist').live 'pagebeforecreate', () ->	
 	$('#playlistItems .thumbup').live 'click', (e) ->
-		$(this).toggleClass 'liked'
-		#if $(this).hasClass 'liked'
-		#	console.log 'Like weghalen'
-		#else
-		#	console.log 'Like toevoegen'
+		index = $(this).parent().parent().index()
+		if $(this).hasClass 'liked' # Cancel vote
+			$(this).removeClass 'liked'
+			upVote index, -1
+			socket.emit 'upVote', index, -1
+		else
+			if $(this).next().hasClass 'disliked' # Cancel downVote
+				$(this).next().removeClass 'disliked'
+				downVote index, -1
+				socket.emit 'downVote', index, -1
+
+			$(this).addClass 'liked'
+			upVote index, 1
+			socket.emit 'upVote', index, 1
 		false
 
 	$('#playlistItems .thumbdown').live 'click', (e) ->
-		$(this).toggleClass 'disliked'
-		#if $(this).hasClass 'disliked'
-		#	console.log 'Dislike weghalen'
-		#else
-		#	console.log 'Dislike toevoegen'
+		index = $(this).parent().parent().index()
+		if $(this).hasClass 'disliked' # Cancel downVote
+			$(this).removeClass 'disliked'
+			downVote index, -1
+			socket.emit 'downVote', index, -1
+		else
+			if $(this).prev().hasClass 'liked' # Cancel vote
+				$(this).prev().removeClass 'liked'
+				upVote index, -1
+				socket.emit 'upVote', index, -1
+
+			$(this).addClass 'disliked'
+			downVote index, 1
+			socket.emit 'downVote', index, 1
+
 		false
 
 	$.templates { playlistItem: '#playlistItem' }
@@ -181,6 +203,12 @@ $('#addTrack').live 'pagebeforecreate', () ->
 	$('#searchSubmit').bind 'click', (e) ->
 		$.mobile.loading 'show'
 		
+		socket.emit 'search', $('#search-basic').val(), (data) ->
+			$.observable(searchData).refresh data
+			$('#searchResults').css 'display', 'block'
+			$.mobile.loading 'hide'
+
+		###	
 		$.ajax {
 			type: 'POST',
 			url: settings.url + '/search',
@@ -195,6 +223,7 @@ $('#addTrack').live 'pagebeforecreate', () ->
 				$.mobile.loading 'hide'
 				#console.log $.observable(searchData)
 		}	
+		###
 
 	$('#searchItems .addTrack').live 'click', (e) ->
 		if $(this).hasClass 'addTrack'

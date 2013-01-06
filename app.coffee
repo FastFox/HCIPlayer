@@ -14,6 +14,8 @@ app.use express.bodyParser()
 
 nest = new echonest.Echonest { api_key: 'PCG7Z9OEOD91S20SU' }
 
+playlistData = []
+
 implodeArtists = (artists) ->
 	first = true
 	for artist in artists
@@ -32,14 +34,41 @@ io.on 'connection', (socket) ->
 
 	socket.on 'nextTrack', () ->
 		socket.broadcast.emit 'nextTrack'
+		playlistData.shift()
+		console.log playlistData
 
 	socket.on 'addTrack', (data) ->
 		socket.broadcast.emit 'newTrack', data
+		playlistData.push data
+
+	socket.on 'reqPlaylist', (fn) ->
+		#console.log 'req playlist'
+		fn playlistData
 	
 	socket.on 'trackInfo', (id, fn) ->
-		console.log id	
+		#console.log id	
 		spotify.lookup { type: 'track', id: id.replace('spotify-WW:track:', '') }, (err, res) ->
 			fn( { album: res.track.album.name } )
+			
+	socket.on 'search', (query, fn) ->
+		tracks = []
+		spotify.search { type: 'track', query: query }, (err, result) ->
+			for track in result.tracks
+				tracks.push {
+					title: track.name,
+					artist: implodeArtists(track.artists),
+					album: track.album.name,
+					spotify: track.href
+				}	
+			fn tracks
+
+	socket.on 'upVote', (index, amount) ->
+		socket.broadcast.emit 'upVote', { index: index, amount: amount }
+		playlistData[index].up += amount;
+
+	socket.on 'downVote', (index, amount) ->
+		socket.broadcast.emit 'downVote', { index: index, amount: amount }
+		playlistData[index].down += amount;
 
 	socket.on 'reqSug', (fn) ->
 		#socket.emit 'sugTrack', { 'hoi' }
@@ -65,6 +94,7 @@ io.on 'connection', (socket) ->
 					//console.log(i, response.songs.length
 					//socket.emit('sugTrack', { artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id, last: i == response.songs.length - 1 });
 					//console.log(response.songs[i]);
+					// spotify url -WW nog weghalen
 					suggestionData.push({ artist: response.songs[i].artist_name, title: response.songs[i].title, spotify: response.songs[i].tracks[0].foreign_id, album: '' });
 						
 					//console.log('hoi');
@@ -84,10 +114,6 @@ spotify.get  '/lookup/1/.json?uri=spotify:artist:4YrKBkKSVeqDamzBPWVnSJ', (err, 
 #spotify.lookup { type: 'track', id: '5iwuX6Bx05LHz7cEZex92' }, (err, res) ->
 
 	#console.log res
-
-#	bla = 'hoi'
-
-#url = 'http://ws.spotify.com/lookup/1/.json?uri=spotify:artist:4YrKBkKSVeqDamzBPWVnSJ&extras=album'
 
 app.post '/search', (req, res) ->
 	#console.log req.body
