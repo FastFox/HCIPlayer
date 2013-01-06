@@ -11,7 +11,6 @@ addTrackToPlaylist = (e) ->
 	data = $.view($(e).parent().parent()).data
 	data.up = 0;
 	data.down = 0;
-	#console.log data
 	$.observable(playlistData).insert playlistData.length, data
 	newTrack = $('#playlistItems li:last').addClass 'new'
 	setTimeout ( ->
@@ -70,7 +69,6 @@ $(document).ready () ->
 
 
 	# events
-
 
 	# Track openklappen voor meer informatie
 	$('ul.list li').live 'click', (e) ->
